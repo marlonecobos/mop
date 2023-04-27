@@ -23,6 +23,8 @@ Description: A set of tools to perform the multiple versions of the Mobility
     following principles proposed in Owens et al. (2013) 
     <doi:10.1016/j.ecolmodel.2013.04.011>, and expanded to obtain more detailed 
     results that help with interpretations.
+URL: https://github.com/marlonecobos/mop
+BugReports: https://github.com/marlonecobos/mop/issues
 Imports:
     doSNOW (>= 1.0), 
     fields (>= 13.3),
