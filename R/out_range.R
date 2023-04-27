@@ -18,6 +18,8 @@
 #' are: "basic", "simple", and "detailed".
 #'
 #' @export
+#'
+#' @importFrom utils combn
 
 
 out_range <- function(m_matrix, g_matrix, type = "basic") {
@@ -118,12 +120,12 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
 # helper function to create table for mop detailed interpretation
 ext_interpretation <- function (variable_names, variable_codes) {
   var_comb <- lapply(1:length(variable_names), function(x) {
-    apply(combn(variable_names, m = x), 2, paste, collapse = ", ")
+    apply(utils::combn(variable_names, m = x), 2, paste, collapse = ", ")
   })
   var_comb <- unlist(var_comb)
 
   var_cod <- lapply(1:length(variable_codes), function(x) {
-    apply(combn(variable_codes, m = x), 2, sum)
+    apply(utils::combn(variable_codes, m = x), 2, sum)
   })
   var_cod <- unlist(var_cod)
 
