@@ -34,7 +34,7 @@
 #'
 #' @importFrom fields rdist
 #' @importFrom utils txtProgressBar setTxtProgressBar
-#' @importFrom stats mahalanobis
+#' @importFrom stats mahalanobis cov
 #' @importFrom parallel detectCores
 #' @importFrom snow makeSOCKcluster stopCluster
 #' @importFrom doSNOW registerDoSNOW
@@ -94,7 +94,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean", percent = 1
       if (distance == "euclidean") {
         cdist <- fields::rdist(g_matrix[seq_rdist, ], m_matrix)
       } else {
-        cv <- cov(g_matrix)
+        cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
           stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv)
         })
@@ -141,7 +141,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean", percent = 1
       if (distance == "euclidean") {
         cdist <- fields::rdist(g_matrix[seq_rdist, ], m_matrix)
       } else {
-        cv <- cov(g_matrix)
+        cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
           stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv)
         })

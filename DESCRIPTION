@@ -24,10 +24,11 @@ Description: A set of tools to perform the multiple versions of the Mobility
     <doi:10.1016/j.ecolmodel.2013.04.011>, and expanded to obtain more detailed 
     results that help with interpretations.
 Imports:
-    doParallel (>= 1.0),
+    doSNOW (>= 1.0), 
+    fields (>= 13.3),
     foreach (>= 1.5),
     parallel,
-    terra (>= 1.6-7),
+    snow (>= 0.4),
     stats,
     utils
 License: GPL (>= 3)
