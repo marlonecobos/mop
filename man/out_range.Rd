@@ -16,7 +16,7 @@ are to be detected). Each column represents a variable. Variable names must
 match those in \code{m_matrix}.}
 
 \item{type}{(character) type of identification to be performed. Options
-are: "basic", "simple", and "detailed".}
+are: "basic", "simple", and "detailed". Default = "basic".}
 }
 \description{
 Options to identify which values in a set of conditions of interest

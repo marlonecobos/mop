@@ -15,7 +15,7 @@
 #' are to be detected). Each column represents a variable. Variable names must
 #' match those in \code{m_matrix}.
 #' @param type (character) type of identification to be performed. Options
-#' are: "basic", "simple", and "detailed".
+#' are: "basic", "simple", and "detailed". Default = "basic".
 #'
 #' @export
 #'
