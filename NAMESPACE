@@ -2,6 +2,7 @@
 
 export(mop)
 export(mop_distance)
+export(new_mop_results)
 export(out_range)
 importFrom(doSNOW,registerDoSNOW)
 importFrom(fields,rdist)
