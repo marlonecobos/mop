@@ -1,20 +1,20 @@
 #' MOP distance calculation
 #'
 #' @description
-#' Calculates distances from each of the poins of interest in g_matrix to a
-#' defined percetage of the reference conditions in m_matrix.
+#' Calculates distances from each of the points of interest in \code{g_matrix}
+#' to a defined percentage of the reference conditions in \code{m_matrix}.
 #'
 #' @usage
 #' mop_distance(m_matrix, g_matrix, distance = "euclidean", percent = 1,
 #'              comp_each = 2000, parallel = FALSE, n_cores = NULL,
 #'              progress_bar = TRUE)
 #'
-#' @param m_matrix matrix of variables representing the original area of
-#' interest. Each column represents a variable.
-#' @param g_matrix matrix of variables representing the area of model projection
-#' (where dissimilarities and/or non-analogous conditions are to be detected).
-#' Each column represents a variable. Variable names must match those in
-#' \code{m_matrix}
+#' @param m_matrix matrix of variables representing the set of conditions to be
+#' used as reference. Each column represents a variable.
+#' @param g_matrix matrix of variables representing the set of conditions to be
+#' compared against the reference conditions (where distances are to be
+#' calculated). Each column represents a variable. Variable names must match
+#' those in \code{m_matrix}.
 #' @param distance (character) one of the options: "euclidean" or "mahalanobis".
 #' Default = "euclidean".
 #' @param percent (numeric) percentage of points of m (the closest ones) used to
