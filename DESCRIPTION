@@ -27,10 +27,10 @@ Imports:
     doParallel (>= 1.0),
     foreach (>= 1.5),
     parallel,
-    terra (>= 3.0),
+    terra (>= 1.6-7),
     stats,
     utils
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
