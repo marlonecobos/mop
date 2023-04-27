@@ -1,0 +1,306 @@
+#' Analysis of extrapolation risks using the MOP metric
+#'
+#' @description
+#' Analysis to calculate the mobility-oriented parity metric and other
+#' sub-products to represent dissimilarities and non-analogous conditions
+#' when comparing a set of conditions of reference (\code{m)) against another
+#' set of conditions of interest (\code{g}).
+#'
+#' @usage
+#' mop(m, g, type = "basic",  calculate_distance = TRUE,
+#'     where_distance = "in_range", distance = "euclidean",
+#'     scale = FALSE, center = FALSE, fix_NA = TRUE,
+#'     percentage = 1, comp_each = 2000, rescale_distance = FALSE,
+#'     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
+#'
+#' @param m SpatRaster or matrix of variables representing a set of conditions
+#' of reference (e.g., conditions in which a model was calibrated).
+#' If a matrix is used, each column represents a variable.
+#' @param g a SpatRaster or matrix of variables representing a set of conditions
+#' of interest for which dissimilarity values and non-analogous conditions will
+#' be detected (e.g., conditions in which a model is projected). Variable names
+#' must match between \code{m} and \code{g}.
+#' @param type (character) type of MOP analyses to be performed. Options
+#' are: "basic", "simple", and "detailed". Default = "basic".
+#' @param calculate_distance (logical) whether to calculate distances
+#' (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
+#' rapidly and does not detect dissimilarity levels (no distances).
+#' @param where_distance (character) where to calculate distances considering
+#' how conditions in \code{g} are positioned in comparison to the range of
+#' conditions in \code{m}; options are: "in_range" = only conditions inside
+#' \code{m} ranges, "out_range" = only conditions outside \code{m} ranges, and
+#' "all" = all conditions. Default = "in_range".
+#' @param distance (character) one of the options: "euclidean" or "mahalanobis".
+#' Default = "euclidean". Valid if \code{calculate_distance} = TRUE.
+#' @param scale scaling options (logical or numeric-alike) as in
+#' \code{\link[base]{scale}}. Default = FALSE.
+#' @param center (logic or numeric-alike) center options as in
+#' \code{\link[base]{scale}}. Default = FALSE.
+#' @param fix_NA (logical) whether to fix the layers so cells with NA values
+#' coincide among all layers. Default = TRUE. Setting this to FALSE may save
+#' some time if the raster layers are big an have no NA matching problems.
+#' @param percentage (numeric) percentage of \code{m} conditions (the closest
+#' ones) used to derive mean environmental distances to each combination of
+#' conditions in \code{g}.
+#' @param comp_each (numeric) number of combinations in \code{g} to be used for
+#' distance calculations at a time (default = 2000). Increasing this number
+#' requires more RAM.
+#' @param rescale_distance (logical) whether or not to re-scale distances 0-1.
+#' Default = FALSE. Re-scaling prevents comparisons of dissimilarity values
+#' obtained from runs with different values of \code{percentage}.
+#' @param parallel (logical) if TRUE, calculations will be performed in parallel
+#' using \code{n_cores} of the computer. Using this option will speed up the
+#' analysis but will demand more RAM. Default = FALSE.
+#' @param n_cores (numeric) number of cores to be used in parallel processing.
+#' Default = NULL, in which case (all CPU cores on current host - 1) will be
+#' used.
+#' @param progress_bar (logical) whether to show a progress bar,
+#' default = TRUE.
+#'
+#' @details
+#' The options for the argument \code{type} return results that differ in
+#' the detail of how non-analogous conditions are identified. The option "basic"
+#' makes calculation as proposed by Owens et al. (2013)
+#' <doi:10.1016/j.ecolmodel.2013.04.011>. Other options involve
+#' further analyses that help to identify non-analogous conditions in more
+#' detail (see description of results returned).
+#'
+#' When the variables used to represent environmental conditions in the areas of
+#' interest differ considerably in their units, scaling and centering is
+#' recommended. This is only valid when Euclidean distances are used.
+#'
+#' @return
+#' A object of class \code{\link{mop_results}} containing:
+#' - **summary**.- a list with details on the data used in the analysis.
+#' - **mop_distances**.- if \code{calculate_distance} = TRUE, a SpatRaster or vector
+#' with distance values for the set of interest (\code{g}). Higher values
+#' represent more dissimilarity compared to the set of reference (\code{m}).
+#' - **mop_basic**.- a SpatRaster or vector, for the set of interest, representing
+#' conditions in which at least one of the variables is non-analogous to the
+#' set of reference. Values should be: 1 for non-analogous conditions, and NA
+#' for conditions inside the ranges of the reference set.
+#' - **mop_simple**.- a SpatRaster or vector, for the set of interest, representing
+#' how many variables in the set of interest are non-analogous to those in the
+#' reference set.
+#' - **mop_detailed**.- a list containing:
+#'     - *interpretation_combined*.- a data.frame to help identify which
+#'     variables in *towards_low_combined* and *towards_high_combined* are
+#'     non-analogous to \code{m} .
+#'     - *towards_low_end*.- a SpatRaster or matrix for all variables
+#'     representing where non-analogous conditions were found towards low values
+#'     of the variable.
+#'     - *towards_high_end*.- a SpatRaster or matrix for all variables
+#'     representing where non-analogous conditions were found towards high
+#'     values of the variable.
+#'     - *towards_low_combined*.- a SpatRaster or vector with values
+#'     representing the identity of the variables found to have non-analogous
+#'     conditions towards low values. If vector, interpretation requires the use
+#'     of the data.frame *interpretation_combined*.
+#'     - *towards_high_combined*.- a SpatRaster or vector with values
+#'     representing the identity of the variables found to have non-analogous
+#'     conditions towards high values. If vector, interpretation requires the
+#'     use of the data.frame *interpretation_combined*.
+#'
+#' @export
+#'
+#' @importFrom terra rast
+
+mop <- function(m, g, type = "basic", calculate_distance = TRUE,
+                where_distance = "in_range", distance = "euclidean",
+                scale = FALSE, center = FALSE, fix_NA = TRUE, percentage = 1,
+                comp_each = 2000, rescale_distance = FALSE, parallel = FALSE,
+                n_cores = NULL, progress_bar = TRUE) {
+
+  # initial tests
+  if (missing(m) | missing(g)) {
+    stop("Arguments 'm' and 'g' must be defined.")
+  }
+
+  clasm <- class(m)[1]
+  clasg <- class(g)[1]
+
+  if (!clasm %in% c("SpatRaster", "matrix", "data.frame")) {
+    stop("'m' must be a 'SpatRaster', 'matrix', or 'data.frame'.")
+  } else {
+    if (clasm == "SpatRaster") {
+      var_names <- names(m)
+    } else {
+      var_names <- colnames(m)
+    }
+  }
+  if (!clasg %in% c("SpatRaster", "matrix")) {
+    stop("'g' must be a 'SpatRaster', 'matrix', or 'data.frame'.")
+  } else {
+    if (clasg == "SpatRaster") {
+      gnames <- names(g)
+    } else {
+      gnames <- colnames(g)
+    }
+  }
+
+  if (!identical(var_names, gnames)) {
+    stop("Variables in 'm' and 'g' must be named identically.")
+  }
+
+  type <- type[1]
+
+
+  # preprocessing
+  ## layer for mop results
+  if (clasg == "SpatRaster") {
+    ### fix NA mismatches across layers
+    if (fix_NA == TRUE) {
+      g <- fix_na_rast(raster_layers = g)
+    }
+
+    ### layer
+    mop <- g[[1]]
+    names(mop) <- "mop"
+  }
+
+  ## getting values
+  m <- m[]
+  g <- g[]
+
+  ## variables and test
+  nvar <- ncol(m)
+
+  ## exclude NAs and number of cells
+  m <- na.omit(m)
+  g <- na.omit(g)
+
+  nm <- nrow(m)
+  ng <- nrow(g)
+
+  if (clasg == "matrix") {
+    mop <- rep(NA, nrow(g))
+  }
+
+  ## scaling options
+  if (distance == "euclidean") {
+    if (scale == TRUE | center == TRUE) {
+      m <- scale(rbind(m, g), center = center, scale = scale)
+      g <- m[(nm + 1):nrow(m), ]
+      m <- m[1:nm, ]
+    }
+  }
+
+
+  # identifying dimensions where g is out of m box
+  out_ranges <- out_range(m_matrix = m, g_matrix = g, type = type)
+
+
+  # distance calculation
+  ## relevant points
+  if (where_distance == "in_range") {
+    reduced <- is.na(out_ranges$basic)
+  }
+  if (where_distance == "out_range") {
+    reduced <- out_ranges$basic == 1
+  }
+  if (where_distance == "all") {
+    reduced <- rep(TRUE, length(out_ranges$basic))
+  }
+
+  ## analysis
+  if (calculate_distance) {
+    g_red <- g[reduced, ]
+    mop1 <- mop_distance(m, g_red, distance, percentage, comp_each,
+                         parallel, n_cores, progress_bar)
+  }
+
+
+  # re-assigning values to rasters
+  ## na values in mop layer
+  if (clasg == "SpatRaster") {
+    nona <- which(!is.na(mop[])) #########################
+  } else {
+    nona <- rep(TRUE, length(mop))
+  }
+
+  ## simple results
+  if (type != "basic") {
+    mop2 <- mop
+    mop2[nona] <- out_ranges$simple
+  } else {
+    mop2 <- NULL
+  }
+
+  ## detailed results
+  if (type == "detailed") {
+    mop3 <- mop
+    mop4 <- mop
+
+    ### results for combined variables
+    mop3[nona] <- out_ranges$low_combined
+    mop4[nona] <- out_ranges$high_combined
+
+
+    #cates_ni <- cates[cates$ID %in% terra::unique(ni)[, 1], ]
+    #levels(ni) <- cates_ni
+
+    ### results for independent variables
+    if (clasg == "SpatRaster") {
+      mop5 <- terra::rast(lapply(1:nvar, function(x) {
+        mop0 <- mop
+        mop0[nona] <- out_ranges$low_all[, x]
+        mop0
+      }))
+      names(mop5) <- var_names
+    } else {
+      mop5 <- out_ranges$low_all
+    }
+
+    if (clasg == "SpatRaster") {
+      mop6 <- terra::rast(lapply(1:nvar, function(x) {
+        mop0 <- mop
+        mop0[nona] <- out_ranges$high_all[, x]
+        mop0
+      }))
+      names(mop6) <- var_names
+    } else {
+      mop6 <- out_ranges$high_all
+    }
+
+  } else {
+    mop3 <- NULL
+    mop4 <- NULL
+    mop5 <- NULL
+    mop6 <- NULL
+  }
+
+  ## MOP results
+  mop[nona] <- out_ranges$basic
+
+  ## Distance results
+  if (calculate_distance) {
+    ### re-scaling if needed
+    if (rescale_distance == TRUE) {
+      out_ranges$basic[reduced] <- mop1 / max(mop1)
+      out_ranges$basic[!reduced] <- NA
+    } else {
+      out_ranges$basic[reduced] <- mop1
+      out_ranges$basic[!reduced] <- NA
+    }
+
+    mop1 <- mop
+    mop1[nona] <- out_ranges$basic
+  }
+
+
+  # returning results MAKE MOP_RESULS OBJECT #####################
+  results <- list(
+    summary = list(
+      variables = var_names, percentage = percentage, type = type,
+      fix_NA = fix_NA, cells_m = nm, cells_g = ng
+    ),
+    mop_distances = mop1, mop_basic = mop, mop_simple = mop2,
+    mop_detailed = list(
+      interpretation_combined = out_ranges$interpretation,
+      towards_low_end = mop5, towards_high_end = mop6,
+      towards_low_combined = mop3, towards_high_combined = mop4
+    )
+  )
+
+  return(results)
+}
