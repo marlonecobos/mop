@@ -5,7 +5,7 @@
 #' to a defined percentage of the reference conditions in \code{m_matrix}.
 #'
 #' @usage
-#' mop_distance(m_matrix, g_matrix, distance = "euclidean", percent = 1,
+#' mop_distance(m_matrix, g_matrix, distance = "euclidean", percentage = 1,
 #'              comp_each = 2000, parallel = FALSE, n_cores = NULL,
 #'              progress_bar = TRUE)
 #'
@@ -17,8 +17,8 @@
 #' those in \code{m_matrix}.
 #' @param distance (character) one of the options: "euclidean" or "mahalanobis".
 #' Default = "euclidean".
-#' @param percent (numeric) percentage of points of m (the closest ones) used to
-#' derive mean environmental distances to each g point. Default = 1.
+#' @param percentage (numeric) percentage of points of m (the closest ones)
+#' used to derive mean environmental distances to each g point. Default = 1.
 #' @param comp_each (numeric) number of points of the g matrix to be used for
 #' distance calculations at a time (default = 2000). Increasing this number
 #' requires more RAM.
@@ -40,9 +40,9 @@
 #' @importFrom doSNOW registerDoSNOW
 #' @importFrom foreach `%dopar%` foreach
 
-mop_distance <- function(m_matrix, g_matrix, distance = "euclidean", percent = 1,
-                         comp_each = 2000, parallel = FALSE, n_cores = NULL,
-                         progress_bar = TRUE) {
+mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
+                         percentage = 1, comp_each = 2000, parallel = FALSE,
+                         n_cores = NULL, progress_bar = TRUE) {
   # initial tests
   if (missing(m_matrix) | missing(g_matrix)) {
     stop("Arguments 'm_matrix' and 'g_matrix' must be defined.")
@@ -59,13 +59,13 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean", percent = 1
     stop("'distance' must be 'euclidean' or 'mahalanobis'.")
   }
 
-  if (percent <= 0 | percent > 100) {
-    stop("'percent' connot be <= 0 or > 100.")
+  if (percentage <= 0 | percentage > 100) {
+    stop("'percentage' connot be <= 0 or > 100.")
   }
 
   # preparing groups of points
   nred <- nrow(g_matrix)
-  per_out <- round(nrow(m_matrix) * (percent / 100))
+  per_out <- round(nrow(m_matrix) * (percentage / 100))
 
   if (nred <= comp_each) {
     comp_each <- ceiling(nred / 3)

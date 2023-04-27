@@ -4,7 +4,7 @@
 \alias{mop_distance}
 \title{MOP distance calculation}
 \usage{
-mop_distance(m_matrix, g_matrix, distance = "euclidean", percent = 1,
+mop_distance(m_matrix, g_matrix, distance = "euclidean", percentage = 1,
              comp_each = 2000, parallel = FALSE, n_cores = NULL,
              progress_bar = TRUE)
 }
@@ -20,8 +20,8 @@ those in \code{m_matrix}.}
 \item{distance}{(character) one of the options: "euclidean" or "mahalanobis".
 Default = "euclidean".}
 
-\item{percent}{(numeric) percentage of points of m (the closest ones) used to
-derive mean environmental distances to each g point. Default = 1.}
+\item{percentage}{(numeric) percentage of points of m (the closest ones)
+used to derive mean environmental distances to each g point. Default = 1.}
 
 \item{comp_each}{(numeric) number of points of the g matrix to be used for
 distance calculations at a time (default = 2000). Increasing this number
