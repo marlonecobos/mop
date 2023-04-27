@@ -2,11 +2,19 @@
 #'
 #' @name mop_results
 #'
-#' @param summary = new("list"),
-#' @param mop_distances = NULL,
-#' @param mop_basic = NULL
-#' @param mop_simple = NULL,
-#' @param mop_detailed = new("list")
+#' @param summary a list with a summary of the data and parameters used in
+#' analysis. Default = empty list.
+#' @param mop_distances a SpatRaster or numeric vector of distances from the
+#' set of conditions of reference to the set of conditions of interest.
+#' Default = NULL.
+#' @param mop_basic a SpatRaster or numeric vector showing conditions in the set
+#' of interest outside the ranges in the reference set. The value \code{1}
+#' indicates conditions outside one or more ranges. Default = NULL.
+#' @param mop_simple a SpatRaster or numeric vector showing conditions in the
+#' set of interest outside the ranges in the reference set. Values indicate how
+#' many variables are outside reference ranges. Default = NULL.
+#' @param mop_detailed a list with a detailed representation of mop results
+#' in conditions outside the range of reference. Default = empty list.
 #'
 #' @export
 #'
