@@ -3,7 +3,7 @@
 #' @description
 #' Analysis to calculate the mobility-oriented parity metric and other
 #' sub-products to represent dissimilarities and non-analogous conditions
-#' when comparing a set of conditions of reference (\code{m)) against another
+#' when comparing a set of conditions of reference (\code{m}) against another
 #' set of conditions of interest (\code{g}).
 #'
 #' @usage
