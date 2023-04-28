@@ -13,26 +13,51 @@ print.mop_results <- function(x, ...) {
 
   cat("MOP distances:\n")
   if (!is.null(x$mop_distances)) {
-    print(x$mop_distances)
+    if (class(x$mop_distances)[1] == "SpatRaster") {
+      print(x$mop_distances)
+    } else {
+      print(head(x$mop_distances))
+      cat("...\n")
+    }
   } else {
     cat("Empty\n")
   }
 
   cat("\nMOP basic:\n")
-  print(x$mop_basic)
+  if (class(x$mop_basic)[1] == "SpatRaster") {
+    print(x$mop_basic)
+  } else {
+    print(head(x$mop_basic))
+    cat("...\n")
+  }
 
   cat("\nMOP simple:\n")
   if (!is.null(x$mop_simple)) {
-    print(x$mop_simple)
+    if (class(x$mop_simple)[1] == "SpatRaster") {
+      print(x$mop_simple)
+    } else {
+      print(head(x$mop_simple))
+      cat("...\n")
+    }
   } else {
     cat("Empty\n")
   }
 
   cat("\nMOP detailed:\n")
   if (!is.null(x$mop_detailed$interpretation_combined)) {
+    cat("interpretation_combined:\n")
     print(head(x$mop_detailed$interpretation_combined))
-    cat("...\n\n")
-    print(x$mop_detailed[-1])
+    cat("...\n")
+    nms <- names(x$mop_detailed)[-1]
+    lapply(nms, function(y) {
+      cat("\n", y, ":\n", sep = "")
+      if (class(x$mop_detailed[[y]])[1] == "SpatRaster") {
+        print(x$mop_detailed[[y]])
+      } else {
+        print(head(x$mop_detailed[[y]]))
+        cat("...\n")
+      }
+    })
   } else {
     cat("Empty\n")
   }
