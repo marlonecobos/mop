@@ -1,7 +1,7 @@
 Package: mop
 Type: Package
 Title: Mobility Oriented-Parity Metric
-Version: 0.0.9
+Version: 0.1.0
 Authors@R: c(
     person("Marlon E.", "Cobos", email = "manubio13@gmail.com", 
     role = c("aut","cre"), comment = c(ORCID = "0000-0002-2611-1767")),
@@ -19,7 +19,7 @@ Description: A set of tools to perform the multiple versions of the Mobility
     set of conditions of interest. If predictive models are projected to 
     conditions different to the ones in which models were calibrated (trained),
     this metric helps to identify projection conditions that differ 
-    substancially from those of calibration. These tools are implemented 
+    substantially from those of calibration. These tools are implemented 
     following principles proposed in Owens et al. (2013) 
     <doi:10.1016/j.ecolmodel.2013.04.011>, and expanded to obtain more detailed 
     results that help with interpretations.
@@ -40,5 +40,5 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 LazyData: true
