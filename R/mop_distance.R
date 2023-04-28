@@ -30,6 +30,10 @@
 #' @param progress_bar (logical) whether to show a progress bar for calculations,
 #' default = TRUE. Valid when calculation are not run in parallel.
 #'
+#' @return
+#' A numeric vector with values of distances calculated according to
+#' parameters used.
+#'
 #' @export
 #'
 #' @importFrom fields rdist
@@ -39,6 +43,15 @@
 #' @importFrom snow makeSOCKcluster stopCluster
 #' @importFrom doSNOW registerDoSNOW
 #' @importFrom foreach `%dopar%` foreach
+#'
+#' @examples
+#' # data
+#' data("reference_matrix", package = "mop")
+#' data("matrix_of_interest", package = "mop")
+#'
+#' # analysis
+#' mop_dist <- mop_distance(m_matrix = reference_matrix,
+#'                          g_matrix = matrix_of_interest)
 
 mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
                          percentage = 1, comp_each = 2000, parallel = FALSE,

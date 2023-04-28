@@ -18,8 +18,45 @@ match those in \code{m_matrix}.}
 \item{type}{(character) type of identification to be performed. Options
 are: "basic", "simple", and "detailed". Default = "basic".}
 }
+\value{
+A list with results from analysis according to \code{type}, and table to help
+with interpretations. NA values represent conditons of interest inside
+ranges of reference conditions. See details.
+}
 \description{
 Options to identify which values in a set of conditions of interest
 (\code{g_matrix}) are outside the range of a set of conditions of
 reference (\code{m_matrix}).
+}
+\details{
+Results are produced according to \code{type}:
+\itemize{
+\item "basic".- helps to identify conditions outside ranges, in general, one or
+variables are only counted as \code{1}. This is returned always.
+\item "simple".- identifies number of variables with conditions outside ranges,
+for in condition of interest the number of non-analogous variables is
+returned.
+\item "detailed".- produces various results (including the two above):
+\itemize{
+\item high_all- identifies non-analogous conditions towards high values of
+variables, for each variable independently.
+\item low_all- identifies non-analogous conditions towards low values of
+variables, for each variable independently.
+\item high_combined- values are used to identify combinations of variables
+with non-analogous conditions towards high values of the variables.
+\item low_combined- values are used to identify combinations of variables
+with non-analogous conditions towards low values of the variables.
+\item interpretation- a data.frame to help identify which variables are
+considered in combined results.
+}
+}
+}
+\examples{
+# data
+data("reference_matrix", package = "mop")
+data("matrix_of_interest", package = "mop")
+
+# analysis
+out <- out_range(m_matrix = reference_matrix,
+                 g_matrix = matrix_of_interest)
 }

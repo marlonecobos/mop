@@ -17,9 +17,42 @@
 #' @param type (character) type of identification to be performed. Options
 #' are: "basic", "simple", and "detailed". Default = "basic".
 #'
+#' @details
+#' Results are produced according to \code{type}:
+#' - "basic".- helps to identify conditions outside ranges, in general, one or
+#' variables are only counted as \code{1}. This is returned always.
+#' - "simple".- identifies number of variables with conditions outside ranges,
+#' for in condition of interest the number of non-analogous variables is
+#' returned.
+#' - "detailed".- produces various results (including the two above):
+#'     - high_all- identifies non-analogous conditions towards high values of
+#'     variables, for each variable independently.
+#'     - low_all- identifies non-analogous conditions towards low values of
+#'     variables, for each variable independently.
+#'     - high_combined- values are used to identify combinations of variables
+#'     with non-analogous conditions towards high values of the variables.
+#'     - low_combined- values are used to identify combinations of variables
+#'     with non-analogous conditions towards low values of the variables.
+#'     - interpretation- a data.frame to help identify which variables are
+#'     considered in combined results.
+#'
+#' @return
+#' A list with results from analysis according to \code{type}, and table to help
+#' with interpretations. NA values represent conditons of interest inside
+#' ranges of reference conditions. See details.
+#'
 #' @export
 #'
 #' @importFrom utils combn
+#'
+#' @examples
+#' # data
+#' data("reference_matrix", package = "mop")
+#' data("matrix_of_interest", package = "mop")
+#'
+#' # analysis
+#' out <- out_range(m_matrix = reference_matrix,
+#'                  g_matrix = matrix_of_interest)
 
 
 out_range <- function(m_matrix, g_matrix, type = "basic") {

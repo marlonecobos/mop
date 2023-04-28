@@ -37,7 +37,20 @@ Default = NULL, in which case all CPU cores on current host - 1 will be used.}
 \item{progress_bar}{(logical) whether to show a progress bar for calculations,
 default = TRUE. Valid when calculation are not run in parallel.}
 }
+\value{
+A numeric vector with values of distances calculated according to
+parameters used.
+}
 \description{
 Calculates distances from each of the points of interest in \code{g_matrix}
 to a defined percentage of the reference conditions in \code{m_matrix}.
+}
+\examples{
+# data
+data("reference_matrix", package = "mop")
+data("matrix_of_interest", package = "mop")
+
+# analysis
+mop_dist <- mop_distance(m_matrix = reference_matrix,
+                         g_matrix = matrix_of_interest)
 }
