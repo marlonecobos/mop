@@ -76,7 +76,7 @@ summary.master_matrix <- function(object, ...) {
   } else {
     frequ <- sum(object$mop_basic == 1, na.rm = TRUE)
   }
-  prec <- frequ / object$summary$N_g
+  perc <- frequ / object$summary$N_g
 
   cat("Percentage = ", perc, "% of all contions\n")
 
