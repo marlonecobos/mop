@@ -20,7 +20,7 @@ are: "basic", "simple", and "detailed". Default = "basic".}
 }
 \value{
 A list with results from analysis according to \code{type}, and table to help
-with interpretations. NA values represent conditons of interest inside
+with interpretations. NA values represent conditions of interest inside
 ranges of reference conditions. See details.
 }
 \description{
