@@ -6,6 +6,7 @@
 #' in this function.
 #' @export
 #' @importFrom terra freq minmax
+#' @importFrom utils head
 #' @return A short description of objects in the console.
 
 print.mop_results <- function(x, ...) {
