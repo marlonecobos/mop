@@ -2,6 +2,11 @@
 #'
 #' @name mop_results
 #'
+#' @usage
+#' new_mop_results(summary = new("list"), mop_distances = NULL,
+#'                 mop_basic = NULL, mop_simple = NULL,
+#'                 mop_detailed = new("list"))
+#'
 #' @param summary a list with a summary of the data and parameters used in
 #' analysis. Default = empty list.
 #' @param mop_distances a SpatRaster or numeric vector of distances from the
@@ -18,13 +23,10 @@
 #'
 #' @export
 #'
+#' @importFrom methods new
+#'
 #' @return
 #' An object of class \code{mop_results}.
-#'
-#' @usage
-#' new_mop_results(summary = new("list"), mop_distances = NULL,
-#'                 mop_basic = NULL, mop_simple = NULL,
-#'                 mop_detailed = new("list"))
 
 new_mop_results <- function(summary = new("list"), mop_distances = NULL,
                             mop_basic = NULL, mop_simple = NULL,
