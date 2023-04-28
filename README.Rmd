@@ -1,6 +1,6 @@
 ---
 title: "mop: Mobility Oriented-Parity Metric"
-author: "Marlon E. Cobos, Hannah L. Owens, Jorge Soberon, A. Townsend Peterson"
+author: "Marlon E. Cobos, Hannah L. Owens, Jorge Soberón, A. Townsend Peterson"
 output: 
   github_document:
     toc: yes
@@ -15,7 +15,9 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of mop is to ...
+<hr>
+
+The package mop contains a set of tools to perform the Mobility Oriented-Parity (MOP) metric, which helps to compare a set of conditions of reference versus another set of of interest. The main goals of the MOP metric are to explore conditions in the set of interest that are non-analogous to those in the reference set, and to quantify how different conditions in the set of interest are. The tools included here help to identify conditions outside the rages of the reference set with greater detail than in earlier implementations. These tools are based on the methods proposed by Owens et al. (2013) doi:10.1016/j.ecolmodel.2013.04.011.
 
 <br>
 
@@ -32,9 +34,69 @@ remotes::install_github("marlonecobos/mop")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The following are basic examples of how to use the main function of the package. First, load the package and some example data.
 
-```{r example, eval=FALSE}
+```{r load}
+# package
 library(mop)
 
+# data
+## current conditions
+reference_layers <- terra::rast(system.file("extdata", "reference_layers.tif",
+                                            package = "mop"))
+
+## future conditions
+layers_of_interest <- terra::rast(system.file("extdata",
+                                              "layers_of_interest.tif",
+                                              package = "mop"))
+
+# plot the data
+## variables to represent current conditions
+terra::plot(reference_layers)
+
+## variables to represent future conditions
+terra::plot(layers_of_interest)
+```
+
+<br>
+
+### Running analyses
+
+The code below helps to run analyses with all the details implemented in the function. To see more basic options and what they imply, check the function documentation with `help(mop)`. Parallel processing is allowed via arguments of this function. 
+
+```{r basic}
+# analysis
+mop_basic_res <- mop(m = reference_layers, g = layers_of_interest, 
+                     type = "detailed", calculate_distance = TRUE, 
+                     where_distance = "all", distance = "euclidean", 
+                     scale = TRUE, center = TRUE)
+
+# summary
+summary(mop_basic_res)
+
+# print results
+mop_basic_res
+```
+
+<br>
+
+### Plotting results
+
+Below are some example plots of the results that can be obtained from analysis with `mop`. 
+
+```{r plots}
+# difference between set of conditions of interest and the reference set
+terra::plot(mop_basic_res$mop_distances)
+
+# basic identification of non-analogous results
+terra::plot(mop_basic_res$mop_basic)
+
+# how many variables have non-analogous conditions
+terra::plot(mop_basic_res$mop_simple)
+
+# combinations of variables with non-analogous conditions towards high values
+terra::plot(mop_basic_res$mop_detailed$towards_high_combined)
+
+# combinations of variables with non-analogous conditions towards low values
+terra::plot(mop_basic_res$mop_detailed$towards_low_combined)
 ```
