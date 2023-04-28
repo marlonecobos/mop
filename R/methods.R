@@ -5,7 +5,7 @@
 #' @param ... further arguments to be passed to or from other methods. Ignored
 #' in this function.
 #' @export
-#' @importFrom utils head
+#' @importFrom terra freq minmax
 #' @return A short description of objects in the console.
 
 print.mop_results <- function(x, ...) {
