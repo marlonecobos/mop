@@ -7,7 +7,7 @@
 #' set of conditions of interest (\code{g}).
 #'
 #' @usage
-#' mop(m, g, type = "basic",  calculate_distance = TRUE,
+#' mop(m, g, type = "basic",  calculate_distance = FALSE,
 #'     where_distance = "in_range", distance = "euclidean",
 #'     scale = FALSE, center = FALSE, fix_NA = TRUE,
 #'     percentage = 1, comp_each = 2000, rescale_distance = FALSE,
@@ -25,9 +25,9 @@
 #' @param calculate_distance (logical) whether to calculate distances
 #' (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
 #' rapidly and does not detect dissimilarity levels (no distances).
-#' @param where_distance (character) where to calculate distances considering
+#' @param where_distance (character) where to calculate distances, considering
 #' how conditions in \code{g} are positioned in comparison to the range of
-#' conditions in \code{m}; options are: "in_range" = only conditions inside
+#' conditions in \code{m}. Options are: "in_range" = only conditions inside
 #' \code{m} ranges, "out_range" = only conditions outside \code{m} ranges, and
 #' "all" = all conditions. Default = "in_range".
 #' @param distance (character) one of the options: "euclidean" or "mahalanobis".
@@ -65,33 +65,34 @@
 #' further analyses that help to identify non-analogous conditions in more
 #' detail (see description of results returned).
 #'
-#' When the variables used to represent environmental conditions in the areas of
-#' interest differ considerably in their units, scaling and centering is
-#' recommended. This is only valid when Euclidean distances are used.
+#' When the variables used to represent conditions have different units,
+#' scaling and centering is recommended. This is only valid when Euclidean
+#' distances are used.
 #'
 #' @return
 #' A object of class \code{\link{mop_results}} containing:
 #' - **summary**.- a list with details on the data used in the analysis.
-#' - **mop_distances**.- if \code{calculate_distance} = TRUE, a SpatRaster or vector
-#' with distance values for the set of interest (\code{g}). Higher values
+#' - **mop_distances**.- if \code{calculate_distance} = TRUE, a SpatRaster or
+#' vector with distance values for the set of interest (\code{g}). Higher values
 #' represent more dissimilarity compared to the set of reference (\code{m}).
-#' - **mop_basic**.- a SpatRaster or vector, for the set of interest, representing
-#' conditions in which at least one of the variables is non-analogous to the
-#' set of reference. Values should be: 1 for non-analogous conditions, and NA
-#' for conditions inside the ranges of the reference set.
-#' - **mop_simple**.- a SpatRaster or vector, for the set of interest, representing
-#' how many variables in the set of interest are non-analogous to those in the
-#' reference set.
+#' - **mop_basic**.- a SpatRaster or vector, for the set of interest,
+#' representing conditions in which at least one of the variables is
+#' non-analogous to the set of reference. Values should be: 1 for non-analogous
+#' conditions, and NA for conditions inside the ranges of the reference set.
+#' - **mop_simple**.- a SpatRaster or vector, for the set of interest,
+#' representing how many variables in the set of interest are non-analogous to
+#' those in the reference set. NA is used for conditions inside the ranges of
+#' the reference set.
 #' - **mop_detailed**.- a list containing:
-#'     - *interpretation_combined*.- a data.frame to help identify which
-#'     variables in *towards_low_combined* and *towards_high_combined* are
-#'     non-analogous to \code{m} .
+#'     - *interpretation_combined*.- a data.frame to help identify combinations
+#'     of variables in *towards_low_combined* and *towards_high_combined* that
+#'     are non-analogous to \code{m} .
 #'     - *towards_low_end*.- a SpatRaster or matrix for all variables
 #'     representing where non-analogous conditions were found towards low values
-#'     of the variable.
+#'     of each variable.
 #'     - *towards_high_end*.- a SpatRaster or matrix for all variables
 #'     representing where non-analogous conditions were found towards high
-#'     values of the variable.
+#'     values of each variable.
 #'     - *towards_low_combined*.- a SpatRaster or vector with values
 #'     representing the identity of the variables found to have non-analogous
 #'     conditions towards low values. If vector, interpretation requires the use
@@ -104,8 +105,26 @@
 #' @export
 #'
 #' @importFrom terra rast
+#' @importFrom stats na.omit
+#'
+#' @seealso
+#' \code{\link{mop_distance}}, \code{\link{out_range}}
+#'
+#' @examples
+#' # data
+#' reference_layers <- terra::rast(system.file("extdata", "reference_layers.tif",
+#'                                             package = "mop"))
+#'
+#' layers_of_interest <- terra::rast(system.file("extdata",
+#'                                               "layers_of_interest.tif",
+#'                                               package = "mop"))
+#'
+#' # analysis
+#' mop_res <- mop(m = reference_layers, g = layers_of_interest)
+#'
+#' summary(mop_res)
 
-mop <- function(m, g, type = "basic", calculate_distance = TRUE,
+mop <- function(m, g, type = "basic", calculate_distance = FALSE,
                 where_distance = "in_range", distance = "euclidean",
                 scale = FALSE, center = FALSE, fix_NA = TRUE, percentage = 1,
                 comp_each = 2000, rescale_distance = FALSE, parallel = FALSE,
@@ -128,7 +147,7 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
       var_names <- colnames(m)
     }
   }
-  if (!clasg %in% c("SpatRaster", "matrix")) {
+  if (!clasg %in% c("SpatRaster", "matrix", "data.frame")) {
     stop("'g' must be a 'SpatRaster', 'matrix', or 'data.frame'.")
   } else {
     if (clasg == "SpatRaster") {
@@ -150,7 +169,7 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
   if (clasg == "SpatRaster") {
     ### fix NA mismatches across layers
     if (fix_NA == TRUE) {
-      g <- fix_na_rast(raster_layers = g)
+      g <- match_na_raster(layers = g)
     }
 
     ### layer
@@ -166,14 +185,14 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
   nvar <- ncol(m)
 
   ## exclude NAs and number of cells
-  m <- na.omit(m)
-  g <- na.omit(g)
+  m <- as.matrix(na.omit(m))
+  g <- as.matrix(na.omit(g))
 
   nm <- nrow(m)
   ng <- nrow(g)
 
-  if (clasg == "matrix") {
-    mop <- rep(NA, nrow(g))
+  if (clasg %in% "matrix") {
+    mop <- rep(NA, ng)
   }
 
   ## scaling options
@@ -196,16 +215,15 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
     reduced <- is.na(out_ranges$basic)
   }
   if (where_distance == "out_range") {
-    reduced <- out_ranges$basic == 1
+    reduced <- !is.na(out_ranges$basic)
   }
   if (where_distance == "all") {
-    reduced <- rep(TRUE, length(out_ranges$basic))
+    reduced <- rep(TRUE, ng)
   }
 
   ## analysis
   if (calculate_distance) {
-    g_red <- g[reduced, ]
-    mop1 <- mop_distance(m, g_red, distance, percentage, comp_each,
+    mop1 <- mop_distance(m, g[reduced, ], distance, percentage, comp_each,
                          parallel, n_cores, progress_bar)
   }
 
@@ -213,9 +231,9 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
   # re-assigning values to rasters
   ## na values in mop layer
   if (clasg == "SpatRaster") {
-    nona <- which(!is.na(mop[])) #########################
+    nona <- which(!is.na(mop[]))
   } else {
-    nona <- rep(TRUE, length(mop))
+    nona <- rep(TRUE, ng)
   }
 
   ## simple results
@@ -235,23 +253,26 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
     mop3[nona] <- out_ranges$low_combined
     mop4[nona] <- out_ranges$high_combined
 
+    if (clasg == "SpatRaster") {
+      cates <- out_ranges$interpretation
+      cates_hc <- cates[cates$values %in% terra::unique(mop4)[, 1], ]
+      levels(mop4) <- cates_hc
 
-    #cates_ni <- cates[cates$ID %in% terra::unique(ni)[, 1], ]
-    #levels(ni) <- cates_ni
+      cates_lc <- cates[cates$values %in% terra::unique(mop3)[, 1], ]
+      levels(mop3) <- cates_lc
+    }
 
     ### results for independent variables
     if (clasg == "SpatRaster") {
+      #### low
       mop5 <- terra::rast(lapply(1:nvar, function(x) {
         mop0 <- mop
         mop0[nona] <- out_ranges$low_all[, x]
         mop0
       }))
       names(mop5) <- var_names
-    } else {
-      mop5 <- out_ranges$low_all
-    }
 
-    if (clasg == "SpatRaster") {
+      #### high
       mop6 <- terra::rast(lapply(1:nvar, function(x) {
         mop0 <- mop
         mop0[nona] <- out_ranges$high_all[, x]
@@ -259,9 +280,9 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
       }))
       names(mop6) <- var_names
     } else {
+      mop5 <- out_ranges$low_all
       mop6 <- out_ranges$high_all
     }
-
   } else {
     mop3 <- NULL
     mop4 <- NULL
@@ -285,15 +306,17 @@ mop <- function(m, g, type = "basic", calculate_distance = TRUE,
 
     mop1 <- mop
     mop1[nona] <- out_ranges$basic
+  } else {
+    mop1 <- NULL
   }
 
 
-  # returning results MAKE MOP_RESULS OBJECT #####################
-  results <- list(
-    summary = list(
-      variables = var_names, percentage = percentage, type = type,
-      fix_NA = fix_NA, cells_m = nm, cells_g = ng
-    ),
+  # returning results
+  results <- new_mop_results(
+    summary = list(variables = var_names,
+                   calculate_distance = calculate_distance,
+                   distance = distance, percentage = percentage, type = type,
+                   fix_NA = fix_NA, N_m = nm, N_g = ng),
     mop_distances = mop1, mop_basic = mop, mop_simple = mop2,
     mop_detailed = list(
       interpretation_combined = out_ranges$interpretation,
