@@ -10,7 +10,11 @@ Marlon E. Cobos, Hannah L. Owens, Jorge Soberón, A. Townsend Peterson
     results</a>
 
 <!-- badges: start -->
+
+[![R build
+status](https://github.com/marlonecobos/mop/workflows/R-CMD-check/badge.svg)](https://github.com/marlonecobos/mop/actions)
 <!-- badges: end -->
+
 <hr>
 
 The package mop contains a set of tools to perform the Mobility

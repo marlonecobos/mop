@@ -13,6 +13,8 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
 ```
 
 <!-- badges: start -->
+[![R build
+status](https://github.com/marlonecobos/mop/workflows/R-CMD-check/badge.svg)](https://github.com/marlonecobos/mop/actions)
 <!-- badges: end -->
 
 <hr>
