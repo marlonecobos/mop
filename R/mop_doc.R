@@ -16,7 +16,7 @@
 #'
 #' @section Functions in mop:
 #' \code{\link{mop}}, \code{\link{mop_distance}}, \code{\link{out_range}},
-#' \code{\link{fix_na_raster}}
+#' \code{\link{match_na_raster}}
 #'
 #' @section Data included:
 #' \code{\link{reference_matrix}}, \code{\link{matrix_of_interest}},
