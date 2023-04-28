@@ -29,8 +29,10 @@ print.mop_results <- function(x, ...) {
   }
 
   cat("\nMOP detailed:\n")
-  if (!is.null(x$mop_detailed)) {
-    print(x$mop_detailed)
+  if (!is.null(x$mop_detailed$interpretation_combined)) {
+    print(head(x$mop_detailed$interpretation_combined))
+    cat("...\n\n")
+    print(x$mop_detailed[-1])
   } else {
     cat("Empty\n")
   }
@@ -48,13 +50,13 @@ print.mop_results <- function(x, ...) {
 #' @export
 #' @return A printed summary.
 
-summary.master_matrix <- function(object, ...) {
+summary.mop_results <- function(object, ...) {
   if (missing(object)) {stop("Argument 'object' is missing")}
 
   cat("\n                        Summary of MOP resuls\n")
   cat("---------------------------------------------------------------------------\n\n")
   cat("MOP summary:\nVariables\n")
-  cat(paste(object$summary$variables, collapse = ", "), "\n")
+  cat(paste(object$summary$variables, collapse = ", "), "\n\n")
   print(as.data.frame(object$summary[-1]))
 
   if (!is.null(object$mop_distances)) {
@@ -70,7 +72,7 @@ summary.master_matrix <- function(object, ...) {
     cat("\n\nDistances were not calculated\n")
   }
 
-  cat("\n\nNon-analogous environments (NAE):\n")
+  cat("\n\nNon-analogous conditions (NAC):\n")
   if (class(object$mop_basic)[1] == "SpatRaster") {
     frequ <- terra::freq(object$mop_basic, value = 1)[1, 3]
   } else {
@@ -78,7 +80,7 @@ summary.master_matrix <- function(object, ...) {
   }
   perc <- frequ / object$summary$N_g
 
-  cat("Percentage = ", perc, "% of all contions\n")
+  cat("Percentage = ", round(perc, 3), "% of all contions\n", sep = "")
 
   if (!is.null(object$mop_simple)) {
     if (class(object$mop_basic)[1] == "SpatRaster") {
@@ -87,6 +89,10 @@ summary.master_matrix <- function(object, ...) {
       maxi <- max(object$mop_simpl, na.rm = TRUE)
     }
 
-    cat("Number of variables with NAE = ", maxi, "\n")
+    cat("Variables with NAC in 'simple' = ", maxi, "\n", sep = "")
+  }
+
+  if (!is.null(object$mop_detailed$interpretation_combined)) {
+    cat("\n\nDetailed results were obtained, not shown here\n")
   }
 }
