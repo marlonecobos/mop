@@ -1,7 +1,7 @@
 Package: mop
 Type: Package
 Title: Mobility Oriented-Parity Metric
-Version: 0.0.4
+Version: 0.0.9
 Authors@R: c(
     person("Marlon E.", "Cobos", email = "manubio13@gmail.com", 
     role = c("aut","cre"), comment = c(ORCID = "0000-0002-2611-1767")),
@@ -12,7 +12,7 @@ Authors@R: c(
     person("A. Townsend", "Peterson", email = "town@ku.edu", role = "aut",
     comment = c(ORCID = "0000-0003-0243-2379")))
 Maintainer: Marlon E. Cobos <manubio13@gmail.com>
-Date: 2023-04-26
+Date: 2023-04-28
 Description: A set of tools to perform the multiple versions of the Mobility
     Oriented-Parity metric. This multivariate analysis helps to characterize 
     levels of dissimilarity between a set of conditions of reference and another
@@ -29,6 +29,7 @@ Imports:
     doSNOW (>= 1.0), 
     fields (>= 13.3),
     foreach (>= 1.5),
+    methods,
     parallel,
     snow (>= 0.4),
     stats,
