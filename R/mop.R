@@ -240,6 +240,13 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
   if (type != "basic") {
     mop2 <- mop
     mop2[nona] <- out_ranges$simple
+
+    if (clasg == "SpatRaster") {
+      valss <- terra::unique(mop2)[, 1]
+      cates <- data.frame(values = valss,
+                          n_variables = as.character(valss))
+      levels(mop2) <- cates
+    }
   } else {
     mop2 <- NULL
   }
