@@ -2,11 +2,11 @@
 % Please edit documentation in R/methods.R
 \name{summary}
 \alias{summary}
-\alias{summary.master_matrix}
+\alias{summary.mop_results}
 \alias{summary,mop_results}
 \title{Summary of attributes and results}
 \usage{
-\method{summary}{master_matrix}(object, ...)
+\method{summary}{mop_results}(object, ...)
 }
 \arguments{
 \item{object}{object of class mop_results.}
