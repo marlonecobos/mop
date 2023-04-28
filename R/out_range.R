@@ -1,4 +1,4 @@
-#' Values outside ranges of reference conditions
+#' Detect values outside ranges of reference conditions
 #'
 #' @description
 #' Options to identify which values in a set of conditions of interest

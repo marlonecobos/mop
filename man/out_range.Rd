@@ -2,7 +2,7 @@
 % Please edit documentation in R/out_range.R
 \name{out_range}
 \alias{out_range}
-\title{Values outside ranges of reference conditions}
+\title{Detect values outside ranges of reference conditions}
 \usage{
 out_range(m_matrix, g_matrix, type = "basic")
 }
