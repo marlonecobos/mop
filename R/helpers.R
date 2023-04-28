@@ -11,6 +11,9 @@
 #' @param layers a SpatRaster object containing two or more variables to be
 #' matched.
 #'
+#' @return
+#' A SpatRaster objects with NA cells matching in all layers.
+#'
 #' @export
 #'
 #' @importFrom terra nlyr mask app

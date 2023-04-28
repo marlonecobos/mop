@@ -10,6 +10,9 @@ match_na_raster(layers)
 \item{layers}{a SpatRaster object containing two or more variables to be
 matched.}
 }
+\value{
+A SpatRaster objects with NA cells matching in all layers.
+}
 \description{
 Options to identify which values in a set of conditions of interest
 (\code{g_matrix}) are outside the range of a set of conditions of
