@@ -28,9 +28,9 @@
 
 #' Example of variables for a set of reference
 #'
-#' A SpatRaster object representing variables in a set of reference.
+#' A `SpatRaster` object representing variables in a set of reference.
 #'
-#' @format A SpatRaster object.
+#' @format A `SpatRaster` object.
 #'
 #' @name reference_layers
 #'
@@ -48,9 +48,9 @@ NULL
 
 #' Example of variables for a set of interest
 #'
-#' A SpatRaster object representing variables in a set of interest.
+#' A `SpatRaster` object representing variables in a set of interest.
 #'
-#' @format A SpatRaster object.
+#' @format A `SpatRaster` object.
 #'
 #' @name layers_of_interest
 #'
