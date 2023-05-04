@@ -36,13 +36,17 @@
 #'
 #' @export
 #'
-#' @importFrom fields rdist
+#' @exportPattern ˆ[[:alpha:]]+
+#'
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom stats mahalanobis cov
 #' @importFrom parallel detectCores
 #' @importFrom snow makeSOCKcluster stopCluster
 #' @importFrom doSNOW registerDoSNOW
 #' @importFrom foreach `%dopar%` foreach
+#' @importFrom Rcpp evalCpp
+#'
+#' @useDynLib mop, .registration = TRUE
 #'
 #' @examples
 #' # data
@@ -105,7 +109,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       seq_rdist <- groups[x]:(groups[x + 1] - 1)
 
       if (distance == "euclidean") {
-        cdist <- fields::rdist(g_matrix[seq_rdist, ], m_matrix)
+        cdist <- eucdist_mm(g_matrix[seq_rdist, ], m_matrix)
       } else {
         cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
@@ -152,7 +156,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       seq_rdist <- groups[i]:(groups[i + 1] - 1)
 
       if (distance == "euclidean") {
-        cdist <- fields::rdist(g_matrix[seq_rdist, ], m_matrix)
+        cdist <- eucdist_mm(g_matrix[seq_rdist, ], m_matrix)
       } else {
         cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
