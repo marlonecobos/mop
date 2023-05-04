@@ -11,95 +11,91 @@ mop(m, g, type = "basic",  calculate_distance = FALSE,
     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 }
 \arguments{
-\item{m}{SpatRaster or matrix of variables representing a set of conditions
+\item{m}{a \code{SpatRaster} or matrix of variables representing a set of conditions
 of reference (e.g., conditions in which a model was calibrated).
 If a matrix is used, each column represents a variable.}
 
-\item{g}{a SpatRaster or matrix of variables representing a set of conditions
+\item{g}{a \code{SpatRaster} or matrix of variables representing a set of conditions
 of interest for which dissimilarity values and non-analogous conditions will
 be detected (e.g., conditions in which a model is projected). Variable names
 must match between \code{m} and \code{g}.}
 
-\item{type}{(character) type of MOP analyses to be performed. Options
-are: "basic", "simple", and "detailed". Default = "basic".}
+\item{type}{\code{character}, type of MOP analyses to be performed. See \code{Details}
+for options.}
 
-\item{calculate_distance}{(logical) whether to calculate distances
+\item{calculate_distance}{\code{logical}, whether to calculate distances
 (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
-rapidly and does not detect dissimilarity levels (no distances).}
+rapidly and does not detect dissimilarity levels.}
 
-\item{where_distance}{(character) where to calculate distances, considering
+\item{where_distance}{\code{character} where to calculate distances, considering
 how conditions in \code{g} are positioned in comparison to the range of
-conditions in \code{m}. Options are: "in_range" = only conditions inside
-\code{m} ranges, "out_range" = only conditions outside \code{m} ranges, and
-"all" = all conditions. Default = "in_range".}
+conditions in \code{m}. See \code{Details} for options.}
 
-\item{distance}{(character) one of the options: "euclidean" or "mahalanobis".
-Default = "euclidean". Valid if \code{calculate_distance} = TRUE.}
+\item{distance}{(character) how distances are calculated, \code{euclidean} or
+\code{mahalanobis}
+Valid if \code{calculate_distance = TRUE}.}
 
-\item{scale}{scaling options (logical or numeric-alike) as in
-\code{\link[base]{scale}}. Default = FALSE.}
+\item{scale}{scaling options \code{logical} or \code{numeric-alike} as in
+\code{\link[base]{scale}}.}
 
-\item{center}{(logic or numeric-alike) center options as in
-\code{\link[base]{scale}}. Default = FALSE.}
+\item{center}{\code{logical} or \code{numeric-alike} center options as in
+\code{\link[base]{scale}}.}
 
-\item{fix_NA}{(logical) whether to fix the layers so cells with NA values
-coincide among all layers. Default = TRUE. Setting this to FALSE may save
-some time if the raster layers are big an have no NA matching problems.}
+\item{fix_NA}{\code{logical} whether to fix the layers so cells with NA values
+are the same in all layers. Setting to FALSE may save some time if the rasters
+are big an have no NA matching problems.}
 
-\item{percentage}{(numeric) percentage of \code{m} conditions (the closest
-ones) used to derive mean environmental distances to each combination of
-conditions in \code{g}.}
+\item{percentage}{\code{numeric} percentage of \code{m} closest conditions used to
+derive mean environmental distances to each combination of conditions in \code{g}.}
 
-\item{comp_each}{(numeric) number of combinations in \code{g} to be used for
-distance calculations at a time (default = 2000). Increasing this number
-requires more RAM.}
+\item{comp_each}{\code{numeric} number of combinations in \code{g} to be used for
+distance calculations at a time. Increasing this number requires more RAM.}
 
-\item{rescale_distance}{(logical) whether or not to re-scale distances 0-1.
-Default = FALSE. Re-scaling prevents comparisons of dissimilarity values
-obtained from runs with different values of \code{percentage}.}
+\item{rescale_distance}{\code{logical} whether or not to re-scale distances 0-1.
+Re-scaling prevents comparisons of dissimilarity values obtained from runs with
+different values of \code{percentage}.}
 
-\item{parallel}{(logical) if TRUE, calculations will be performed in parallel
+\item{parallel}{\code{logical} should calculations be performed in parallel
 using \code{n_cores} of the computer. Using this option will speed up the
-analysis but will demand more RAM. Default = FALSE.}
+analysis but will demand more RAM.}
 
-\item{n_cores}{(numeric) number of cores to be used in parallel processing.
-Default = NULL, in which case (all CPU cores on current host - 1) will be
-used.}
+\item{n_cores}{\code{numeric} number of cores to be used in parallel processing.
+If \code{parallel = TRUE} and \code{n_cores = NULL} (all CPU cores on current host - 1)
+will be used.}
 
-\item{progress_bar}{(logical) whether to show a progress bar,
-default = TRUE.}
+\item{progress_bar}{(logical) whether to show a progress bar.}
 }
 \value{
 A object of class \code{\link{mop_results}} containing:
 \itemize{
-\item \strong{summary}.- a list with details on the data used in the analysis.
-\item \strong{mop_distances}.- if \code{calculate_distance} = TRUE, a SpatRaster or
+\item \strong{summary} - a list with details on the data used in the analysis.
+\item \strong{mop_distances} - if \code{calculate_distance} = TRUE, a SpatRaster or
 vector with distance values for the set of interest (\code{g}). Higher values
 represent more dissimilarity compared to the set of reference (\code{m}).
-\item \strong{mop_basic}.- a SpatRaster or vector, for the set of interest,
+\item \strong{mop_basic} - a SpatRaster or vector, for the set of interest,
 representing conditions in which at least one of the variables is
 non-analogous to the set of reference. Values should be: 1 for non-analogous
 conditions, and NA for conditions inside the ranges of the reference set.
-\item \strong{mop_simple}.- a SpatRaster or vector, for the set of interest,
+\item \strong{mop_simple} - a SpatRaster or vector, for the set of interest,
 representing how many variables in the set of interest are non-analogous to
 those in the reference set. NA is used for conditions inside the ranges of
 the reference set.
-\item \strong{mop_detailed}.- a list containing:
+\item \strong{mop_detailed} - a list containing:
 \itemize{
-\item \emph{interpretation_combined}.- a data.frame to help identify combinations
+\item \emph{interpretation_combined} - a data.frame to help identify combinations
 of variables in \emph{towards_low_combined} and \emph{towards_high_combined} that
-are non-analogous to \code{m} .
-\item \emph{towards_low_end}.- a SpatRaster or matrix for all variables
+are non-analogous to \code{m}.
+\item \emph{towards_low_end} - a SpatRaster or matrix for all variables
 representing where non-analogous conditions were found towards low values
 of each variable.
-\item \emph{towards_high_end}.- a SpatRaster or matrix for all variables
+\item \emph{towards_high_end} - a SpatRaster or matrix for all variables
 representing where non-analogous conditions were found towards high
 values of each variable.
-\item \emph{towards_low_combined}.- a SpatRaster or vector with values
+\item \emph{towards_low_combined} - a SpatRaster or vector with values
 representing the identity of the variables found to have non-analogous
 conditions towards low values. If vector, interpretation requires the use
 of the data.frame \emph{interpretation_combined}.
-\item \emph{towards_high_combined}.- a SpatRaster or vector with values
+\item \emph{towards_high_combined} - a SpatRaster or vector with values
 representing the identity of the variables found to have non-analogous
 conditions towards high values. If vector, interpretation requires the
 use of the data.frame \emph{interpretation_combined}.
@@ -113,12 +109,24 @@ when comparing a set of conditions of reference (\code{m}) against another
 set of conditions of interest (\code{g}).
 }
 \details{
-The options for the argument \code{type} return results that differ in
-the detail of how non-analogous conditions are identified. The option "basic"
-makes calculation as proposed by Owens et al. (2013)
-\url{doi:10.1016/j.ecolmodel.2013.04.011}. Other options involve
-further analyses that help to identify non-analogous conditions in more
-detail (see description of results returned).
+\code{type} options return results that differ in the detail of how non-analogous
+conditions are identified.
+\itemize{
+\item \strong{basic} - makes calculation as proposed by Owens et al. (2013)
+\url{doi:10.1016/j.ecolmodel.2013.04.011}.
+\item \strong{simple} - calculates how many variables in the set of interest are
+non-analogous to those in the reference set.
+\item \strong{detailed} - calculates five additional extrapolation metrics. See
+\code{mop_detailed} under \code{Value} below for full details.
+}
+
+\code{where_distance} options determine what values should be used to calculate
+dissimilarity
+\itemize{
+\item \strong{in_range} - only conditions inside \code{m} ranges
+\item \strong{out_range} - only conditions outside \code{m} ranges
+\item \strong{all} - all conditions
+}
 
 When the variables used to represent conditions have different units,
 scaling and centering is recommended. This is only valid when Euclidean

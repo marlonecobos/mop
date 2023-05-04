@@ -4,14 +4,14 @@
 \alias{layers_of_interest}
 \title{Example of variables for a set of interest}
 \format{
-A SpatRaster object.
+A \code{SpatRaster} object.
 }
 \value{
 No return value, used with function \code{\link[terra]{rast}} to
 bring raster variables used in analysis.
 }
 \description{
-A SpatRaster object representing variables in a set of interest.
+A \code{SpatRaster} object representing variables in a set of interest.
 }
 \examples{
 layers_of_interest <- terra::rast(system.file("extdata",

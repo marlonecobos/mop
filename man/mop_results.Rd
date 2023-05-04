@@ -13,15 +13,15 @@ new_mop_results(summary = new("list"), mop_distances = NULL,
 \item{summary}{a list with a summary of the data and parameters used in
 analysis. Default = empty list.}
 
-\item{mop_distances}{a SpatRaster or numeric vector of distances from the
+\item{mop_distances}{a \code{SpatRaster} or numeric vector of distances from the
 set of conditions of reference to the set of conditions of interest.
 Default = NULL.}
 
-\item{mop_basic}{a SpatRaster or numeric vector showing conditions in the set
+\item{mop_basic}{a \code{SpatRaster} or numeric vector showing conditions in the set
 of interest outside the ranges in the reference set. The value \code{1}
 indicates conditions outside one or more ranges. Default = NULL.}
 
-\item{mop_simple}{a SpatRaster or numeric vector showing conditions in the
+\item{mop_simple}{a \code{SpatRaster} or numeric vector showing conditions in the
 set of interest outside the ranges in the reference set. Values indicate how
 many variables are outside reference ranges. Default = NULL.}
 
