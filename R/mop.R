@@ -20,7 +20,7 @@
 #' of interest for which dissimilarity values and non-analogous conditions will
 #' be detected (e.g., conditions in which a model is projected). Variable names
 #' must match between \code{m} and \code{g}.
-#' @param type (character) type of MOP analyses to be performed. Options
+#' @param type (character) type of MOP analysis to be performed. Options
 #' are: "basic", "simple", and "detailed". Default = "basic".
 #' @param calculate_distance (logical) whether to calculate distances
 #' (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
@@ -71,7 +71,19 @@
 #'
 #' @return
 #' A object of class \code{\link{mop_results}} containing:
-#' - **summary**.- a list with details on the data used in the analysis.
+#' - **summary**.- a list with details on the data used in the analysis:
+#'     - *variables*.- (character) name of variables considered.
+#'     - *calculate_distance*.- (logical) value according to the argument
+#'     \code{calculate_distance}.
+#'     - *distance*.- (character) option of distance used.
+#'     - *percentage*.- (numeric) percentage of \code{m} used as reference for
+#'     distance calculation.
+#'     - *type*.- (character) type of MOP analysis performed.
+#'     - *fix_NA*.- (logical) value according to the argument \code{fix_NA}.
+#'     - *N_m*.- (numeric) total number of elements (cells with values or valid
+#'     rows) in \code{m}.
+#'     - *N_g*.- (numeric) total number of elements (cells with values or valid
+#'     rows) in \code{g}.
 #' - **mop_distances**.- if \code{calculate_distance} = TRUE, a SpatRaster or
 #' vector with distance values for the set of interest (\code{g}). Higher values
 #' represent more dissimilarity compared to the set of reference (\code{m}).
