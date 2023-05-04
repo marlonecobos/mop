@@ -5,7 +5,7 @@
 \alias{mop_package}
 \title{mop: Mobility Oriented-Parity Metric}
 \description{
-\code{mop()} contains a set of tools to perform the Mobility Oriented-Parity metric,
+\code{mop} contains a set of tools to perform the Mobility Oriented-Parity metric,
 which helps to compare a set of conditions of reference versus another set of
 of interest.
 }

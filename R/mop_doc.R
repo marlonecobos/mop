@@ -1,7 +1,7 @@
 #' mop: Mobility Oriented-Parity Metric
 #'
 #' @description
-#' `mop()` contains a set of tools to perform the Mobility Oriented-Parity metric,
+#' `mop` contains a set of tools to perform the Mobility Oriented-Parity metric,
 #' which helps to compare a set of conditions of reference versus another set of
 #' of interest.
 #'

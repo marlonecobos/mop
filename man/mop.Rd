@@ -23,7 +23,7 @@ must match between \code{m} and \code{g}.}
 \item{type}{\code{character}, type of MOP analysis to be performed. See \code{Details}
 for options.}
 
-\item{calculate_distance}{\code{logical}, whether to calculate distances
+\item{calculate_distance}{\code{logical} whether to calculate distances
 (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
 rapidly and does not detect dissimilarity levels.}
 
@@ -32,8 +32,7 @@ how conditions in \code{g} are positioned in comparison to the range of
 conditions in \code{m}. See \code{Details} for options.}
 
 \item{distance}{(character) how distances are calculated, \code{euclidean} or
-\code{mahalanobis}
-Valid if \code{calculate_distance = TRUE}.}
+\code{mahalanobis}. Valid if \code{calculate_distance = TRUE}.}
 
 \item{scale}{scaling options \code{logical} or \code{numeric-alike} as in
 \code{\link[base]{scale}}.}
