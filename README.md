@@ -42,7 +42,7 @@ al. (2013)](https://doi.org/10.1016/j.ecolmodel.2013.04.011).
 Before installing `mop`, make sure to obtain the compilation tools
 required: [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for
 Windows, [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-for Mac, and `ggc` or similar compilers in Linux see examples
+for Mac, and `ggc` or similar compilers in Linux, see examples
 [here](https://gcc.gnu.org/install/) or
 [here](https://www.makeuseof.com/how-to-install-c-compiler-linux/).
 
@@ -53,6 +53,8 @@ After that, you can install the development version of `mop` from its
 # install.packages("remotes")
 remotes::install_github("marlonecobos/mop")
 ```
+
+<br>
 
 ### Install stable version from CRAN
 
