@@ -4,14 +4,14 @@
 \alias{reference_layers}
 \title{Example of variables for a set of reference}
 \format{
-A SpatRaster object.
+A \code{SpatRaster} object.
 }
 \value{
 No return value, used with function \code{\link[terra]{rast}} to
 bring raster variables used in analysis.
 }
 \description{
-A SpatRaster object representing variables in a set of reference. Variables
+A \code{SpatRaster} object representing variables in a set of reference. Variables
 represent current bioclimatic variables downloaded from the WorldClim
 database (\url{https://worldclim.org/}).
 }

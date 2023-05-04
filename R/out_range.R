@@ -8,38 +8,38 @@
 #' @usage
 #' out_range(m_matrix, g_matrix, type = "basic")
 #'
-#' @param m_matrix matrix of variables representing the set of conditions to be
+#' @param m_matrix `matrix` of variables representing the set of conditions to be
 #' used as reference. Each column represents a variable.
-#' @param g_matrix matrix of variables representing the set of conditions to be
+#' @param g_matrix `matrix` of variables representing the set of conditions to be
 #' compared against the reference conditions (where conditions outside range
 #' are to be detected). Each column represents a variable. Variable names must
 #' match those in \code{m_matrix}.
-#' @param type (character) type of identification to be performed. Options
-#' are: "basic", "simple", and "detailed". Default = "basic".
+#' @param type `character` type of identification to be performed. See `Details`
+#' for options.
 #'
 #' @details
 #' Results are produced according to \code{type}:
-#' - "basic".- helps to identify conditions outside ranges, in general, one or
+#' - **basic** - helps to identify conditions outside ranges, in general, one or
 #' variables are only counted as \code{1}. This is returned always.
-#' - "simple".- identifies number of variables with conditions outside ranges,
+#' - **simple** - identifies number of variables with conditions outside ranges,
 #' for in condition of interest the number of non-analogous variables is
-#' returned.
-#' - "detailed".- produces various results (including the two above):
-#'     - high_all- identifies non-analogous conditions towards high values of
+#' returned
+#' - **detailed** - produces various results (including the two above):
+#'     - *high_all* - identifies non-analogous conditions towards high values of
 #'     variables, for each variable independently.
-#'     - low_all- identifies non-analogous conditions towards low values of
+#'     - *low_all* - identifies non-analogous conditions towards low values of
 #'     variables, for each variable independently.
-#'     - high_combined- values are used to identify combinations of variables
+#'     - *high_combined* - values are used to identify combinations of variables
 #'     with non-analogous conditions towards high values of the variables.
-#'     - low_combined- values are used to identify combinations of variables
+#'     - *low_combined* - values are used to identify combinations of variables
 #'     with non-analogous conditions towards low values of the variables.
-#'     - interpretation- a data.frame to help identify which variables are
+#'     - *interpretation* - a `data.frame` to help identify which variables are
 #'     considered in combined results.
 #'
 #' @return
 #' A list with results from analysis according to \code{type}, and table to help
 #' with interpretations. NA values represent conditions of interest inside
-#' ranges of reference conditions. See details.
+#' ranges of reference conditions. See `Details`.
 #'
 #' @export
 #'

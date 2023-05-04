@@ -7,21 +7,21 @@
 out_range(m_matrix, g_matrix, type = "basic")
 }
 \arguments{
-\item{m_matrix}{matrix of variables representing the set of conditions to be
+\item{m_matrix}{\code{matrix} of variables representing the set of conditions to be
 used as reference. Each column represents a variable.}
 
-\item{g_matrix}{matrix of variables representing the set of conditions to be
+\item{g_matrix}{\code{matrix} of variables representing the set of conditions to be
 compared against the reference conditions (where conditions outside range
 are to be detected). Each column represents a variable. Variable names must
 match those in \code{m_matrix}.}
 
-\item{type}{(character) type of identification to be performed. Options
-are: "basic", "simple", and "detailed". Default = "basic".}
+\item{type}{\code{character} type of identification to be performed. See \code{Details}
+for options.}
 }
 \value{
 A list with results from analysis according to \code{type}, and table to help
 with interpretations. NA values represent conditions of interest inside
-ranges of reference conditions. See details.
+ranges of reference conditions. See \code{Details}.
 }
 \description{
 Options to identify which values in a set of conditions of interest
@@ -31,22 +31,22 @@ reference (\code{m_matrix}).
 \details{
 Results are produced according to \code{type}:
 \itemize{
-\item "basic".- helps to identify conditions outside ranges, in general, one or
+\item \strong{basic} - helps to identify conditions outside ranges, in general, one or
 variables are only counted as \code{1}. This is returned always.
-\item "simple".- identifies number of variables with conditions outside ranges,
+\item \strong{simple} - identifies number of variables with conditions outside ranges,
 for in condition of interest the number of non-analogous variables is
-returned.
-\item "detailed".- produces various results (including the two above):
+returned
+\item \strong{detailed} - produces various results (including the two above):
 \itemize{
-\item high_all- identifies non-analogous conditions towards high values of
+\item \emph{high_all} - identifies non-analogous conditions towards high values of
 variables, for each variable independently.
-\item low_all- identifies non-analogous conditions towards low values of
+\item \emph{low_all} - identifies non-analogous conditions towards low values of
 variables, for each variable independently.
-\item high_combined- values are used to identify combinations of variables
+\item \emph{high_combined} - values are used to identify combinations of variables
 with non-analogous conditions towards high values of the variables.
-\item low_combined- values are used to identify combinations of variables
+\item \emph{low_combined} - values are used to identify combinations of variables
 with non-analogous conditions towards low values of the variables.
-\item interpretation- a data.frame to help identify which variables are
+\item \emph{interpretation} - a \code{data.frame} to help identify which variables are
 considered in combined results.
 }
 }

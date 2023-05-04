@@ -8,11 +8,11 @@
 #' @usage
 #' match_na_raster(layers)
 #'
-#' @param layers a SpatRaster object containing two or more variables to be
+#' @param layers a `SpatRaster` object containing two or more variables to be
 #' matched.
 #'
 #' @return
-#' A SpatRaster objects with NA cells matching in all layers.
+#' A `SpatRaster` object with NA cells matching in all layers.
 #'
 #' @export
 #'

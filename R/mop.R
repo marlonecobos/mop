@@ -13,57 +13,60 @@
 #'     percentage = 1, comp_each = 2000, rescale_distance = FALSE,
 #'     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 #'
-#' @param m SpatRaster or matrix of variables representing a set of conditions
+#' @param m a `SpatRaster` or matrix of variables representing a set of conditions
 #' of reference (e.g., conditions in which a model was calibrated).
 #' If a matrix is used, each column represents a variable.
-#' @param g a SpatRaster or matrix of variables representing a set of conditions
+#' @param g a `SpatRaster` or matrix of variables representing a set of conditions
 #' of interest for which dissimilarity values and non-analogous conditions will
 #' be detected (e.g., conditions in which a model is projected). Variable names
 #' must match between \code{m} and \code{g}.
-#' @param type (character) type of MOP analysis to be performed. Options
-#' are: "basic", "simple", and "detailed". Default = "basic".
-#' @param calculate_distance (logical) whether to calculate distances
+#' @param type `character`, type of MOP analysis to be performed. See `Details`
+#' for options.
+#' @param calculate_distance `logical` whether to calculate distances
 #' (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
-#' rapidly and does not detect dissimilarity levels (no distances).
-#' @param where_distance (character) where to calculate distances, considering
+#' rapidly and does not detect dissimilarity levels.
+#' @param where_distance `character` where to calculate distances, considering
 #' how conditions in \code{g} are positioned in comparison to the range of
-#' conditions in \code{m}. Options are: "in_range" = only conditions inside
-#' \code{m} ranges, "out_range" = only conditions outside \code{m} ranges, and
-#' "all" = all conditions. Default = "in_range".
-#' @param distance (character) one of the options: "euclidean" or "mahalanobis".
-#' Default = "euclidean". Valid if \code{calculate_distance} = TRUE.
-#' @param scale scaling options (logical or numeric-alike) as in
-#' \code{\link[base]{scale}}. Default = FALSE.
-#' @param center (logic or numeric-alike) center options as in
-#' \code{\link[base]{scale}}. Default = FALSE.
-#' @param fix_NA (logical) whether to fix the layers so cells with NA values
-#' coincide among all layers. Default = TRUE. Setting this to FALSE may save
-#' some time if the raster layers are big an have no NA matching problems.
-#' @param percentage (numeric) percentage of \code{m} conditions (the closest
-#' ones) used to derive mean environmental distances to each combination of
-#' conditions in \code{g}.
-#' @param comp_each (numeric) number of combinations in \code{g} to be used for
-#' distance calculations at a time (default = 2000). Increasing this number
-#' requires more RAM.
-#' @param rescale_distance (logical) whether or not to re-scale distances 0-1.
-#' Default = FALSE. Re-scaling prevents comparisons of dissimilarity values
-#' obtained from runs with different values of \code{percentage}.
-#' @param parallel (logical) if TRUE, calculations will be performed in parallel
+#' conditions in \code{m}. See `Details` for options.
+#' @param distance (character) how distances are calculated, `euclidean` or
+#' `mahalanobis`. Valid if `calculate_distance = TRUE`.
+#' @param scale scaling options `logical` or `numeric-alike` as in
+#' \code{\link[base]{scale}}.
+#' @param center `logical` or `numeric-alike` center options as in
+#' \code{\link[base]{scale}}.
+#' @param fix_NA `logical` whether to fix the layers so cells with NA values
+#' are the same in all layers. Setting to FALSE may save some time if the rasters
+#' are big an have no NA matching problems.
+#' @param percentage `numeric` percentage of \code{m} closest conditions used to
+#' derive mean environmental distances to each combination of conditions in \code{g}.
+#' @param comp_each `numeric` number of combinations in \code{g} to be used for
+#' distance calculations at a time. Increasing this number requires more RAM.
+#' @param rescale_distance `logical` whether or not to re-scale distances 0-1.
+#' Re-scaling prevents comparisons of dissimilarity values obtained from runs with
+#' different values of \code{percentage}.
+#' @param parallel `logical` should calculations be performed in parallel
 #' using \code{n_cores} of the computer. Using this option will speed up the
-#' analysis but will demand more RAM. Default = FALSE.
-#' @param n_cores (numeric) number of cores to be used in parallel processing.
-#' Default = NULL, in which case (all CPU cores on current host - 1) will be
-#' used.
-#' @param progress_bar (logical) whether to show a progress bar,
-#' default = TRUE.
+#' analysis but will demand more RAM.
+#' @param n_cores `numeric` number of cores to be used in parallel processing.
+#' If `parallel = TRUE` and `n_cores = NULL` (all CPU cores on current host - 1)
+#' will be used.
+#' @param progress_bar (logical) whether to show a progress bar.
 #'
 #' @details
-#' The options for the argument \code{type} return results that differ in
-#' the detail of how non-analogous conditions are identified. The option "basic"
-#' makes calculation as proposed by Owens et al. (2013)
-#' <doi:10.1016/j.ecolmodel.2013.04.011>. Other options involve
-#' further analyses that help to identify non-analogous conditions in more
-#' detail (see description of results returned).
+#' `type` options return results that differ in the detail of how non-analogous
+#' conditions are identified.
+#' - **basic** - makes calculation as proposed by Owens et al. (2013)
+#' <doi:10.1016/j.ecolmodel.2013.04.011>.
+#' - **simple** - calculates how many variables in the set of interest are
+#' non-analogous to those in the reference set.
+#' - **detailed** - calculates five additional extrapolation metrics. See
+#' `mop_detailed` under `Value` below for full details.
+#'
+#' `where_distance` options determine what values should be used to calculate
+#' dissimilarity
+#' - **in_range** - only conditions inside `m` ranges
+#' - **out_range** - only conditions outside `m` ranges
+#' - **all** - all conditions
 #'
 #' When the variables used to represent conditions have different units,
 #' scaling and centering is recommended. This is only valid when Euclidean
@@ -71,45 +74,45 @@
 #'
 #' @return
 #' A object of class \code{\link{mop_results}} containing:
-#' - **summary**.- a list with details on the data used in the analysis:
-#'     - *variables*.- (character) name of variables considered.
-#'     - *calculate_distance*.- (logical) value according to the argument
+#' - **summary** - a list with details on the data used in the analysis:
+#'     - *variables* - name of variables considered.
+#'     - *calculate_distance* - value according to the argument
 #'     \code{calculate_distance}.
-#'     - *distance*.- (character) option of distance used.
-#'     - *percentage*.- (numeric) percentage of \code{m} used as reference for
+#'     - *distance* - option of distance used.
+#'     - *percentage* - percentage of \code{m} used as reference for
 #'     distance calculation.
-#'     - *type*.- (character) type of MOP analysis performed.
-#'     - *fix_NA*.- (logical) value according to the argument \code{fix_NA}.
-#'     - *N_m*.- (numeric) total number of elements (cells with values or valid
+#'     - *type* - type of MOP analysis performed.
+#'     - *fix_NA* - value according to the argument \code{fix_NA}.
+#'     - *N_m* - total number of elements (cells with values or valid
 #'     rows) in \code{m}.
-#'     - *N_g*.- (numeric) total number of elements (cells with values or valid
+#'     - *N_g* - total number of elements (cells with values or valid
 #'     rows) in \code{g}.
-#' - **mop_distances**.- if \code{calculate_distance} = TRUE, a SpatRaster or
+#' - **mop_distances** - if \code{calculate_distance} = TRUE, a SpatRaster or
 #' vector with distance values for the set of interest (\code{g}). Higher values
 #' represent more dissimilarity compared to the set of reference (\code{m}).
-#' - **mop_basic**.- a SpatRaster or vector, for the set of interest,
+#' - **mop_basic** - a SpatRaster or vector, for the set of interest,
 #' representing conditions in which at least one of the variables is
 #' non-analogous to the set of reference. Values should be: 1 for non-analogous
 #' conditions, and NA for conditions inside the ranges of the reference set.
-#' - **mop_simple**.- a SpatRaster or vector, for the set of interest,
+#' - **mop_simple** - a SpatRaster or vector, for the set of interest,
 #' representing how many variables in the set of interest are non-analogous to
 #' those in the reference set. NA is used for conditions inside the ranges of
 #' the reference set.
-#' - **mop_detailed**.- a list containing:
-#'     - *interpretation_combined*.- a data.frame to help identify combinations
+#' - **mop_detailed** - a list containing:
+#'     - *interpretation_combined* - a data.frame to help identify combinations
 #'     of variables in *towards_low_combined* and *towards_high_combined* that
-#'     are non-analogous to \code{m} .
-#'     - *towards_low_end*.- a SpatRaster or matrix for all variables
+#'     are non-analogous to \code{m}.
+#'     - *towards_low_end* - a SpatRaster or matrix for all variables
 #'     representing where non-analogous conditions were found towards low values
 #'     of each variable.
-#'     - *towards_high_end*.- a SpatRaster or matrix for all variables
+#'     - *towards_high_end* - a SpatRaster or matrix for all variables
 #'     representing where non-analogous conditions were found towards high
 #'     values of each variable.
-#'     - *towards_low_combined*.- a SpatRaster or vector with values
+#'     - *towards_low_combined* - a SpatRaster or vector with values
 #'     representing the identity of the variables found to have non-analogous
 #'     conditions towards low values. If vector, interpretation requires the use
 #'     of the data.frame *interpretation_combined*.
-#'     - *towards_high_combined*.- a SpatRaster or vector with values
+#'     - *towards_high_combined* - a SpatRaster or vector with values
 #'     representing the identity of the variables found to have non-analogous
 #'     conditions towards high values. If vector, interpretation requires the
 #'     use of the data.frame *interpretation_combined*.
