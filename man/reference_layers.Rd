@@ -11,7 +11,9 @@ No return value, used with function \code{\link[terra]{rast}} to
 bring raster variables used in analysis.
 }
 \description{
-A SpatRaster object representing variables in a set of reference.
+A SpatRaster object representing variables in a set of reference. Variables
+represent current bioclimatic variables downloaded from the WorldClim
+database (\url{https://worldclim.org/}).
 }
 \examples{
 reference_layers <- terra::rast(system.file("extdata", "reference_layers.tif",
