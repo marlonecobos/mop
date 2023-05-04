@@ -28,7 +28,9 @@
 
 #' Example of variables for a set of reference
 #'
-#' A `SpatRaster` object representing variables in a set of reference.
+#' A `SpatRaster` object representing variables in a set of reference. Variables
+#' represent current bioclimatic variables downloaded from the WorldClim
+#' database (\url{https://worldclim.org/}).
 #'
 #' @format A `SpatRaster` object.
 #'
@@ -48,7 +50,9 @@ NULL
 
 #' Example of variables for a set of interest
 #'
-#' A `SpatRaster` object representing variables in a set of interest.
+#' A `SpatRaster` object representing variables in a set of interest. Variables
+#' represent future bioclimatic variables downloaded from the WorldClim database
+#' (\url{https://worldclim.org/}).
 #'
 #' @format A `SpatRaster` object.
 #'

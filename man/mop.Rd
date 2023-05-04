@@ -20,7 +20,7 @@ of interest for which dissimilarity values and non-analogous conditions will
 be detected (e.g., conditions in which a model is projected). Variable names
 must match between \code{m} and \code{g}.}
 
-\item{type}{\code{character}, type of MOP analyses to be performed. See \code{Details}
+\item{type}{\code{character}, type of MOP analysis to be performed. See \code{Details}
 for options.}
 
 \item{calculate_distance}{\code{logical}, whether to calculate distances
@@ -68,7 +68,21 @@ will be used.}
 \value{
 A object of class \code{\link{mop_results}} containing:
 \itemize{
-\item \strong{summary} - a list with details on the data used in the analysis.
+\item \strong{summary} - a list with details on the data used in the analysis:
+\itemize{
+\item \emph{variables} - name of variables considered.
+\item \emph{calculate_distance} - value according to the argument
+\code{calculate_distance}.
+\item \emph{distance} - option of distance used.
+\item \emph{percentage} - percentage of \code{m} used as reference for
+distance calculation.
+\item \emph{type} - type of MOP analysis performed.
+\item \emph{fix_NA} - value according to the argument \code{fix_NA}.
+\item \emph{N_m} - total number of elements (cells with values or valid
+rows) in \code{m}.
+\item \emph{N_g} - total number of elements (cells with values or valid
+rows) in \code{g}.
+}
 \item \strong{mop_distances} - if \code{calculate_distance} = TRUE, a SpatRaster or
 vector with distance values for the set of interest (\code{g}). Higher values
 represent more dissimilarity compared to the set of reference (\code{m}).
