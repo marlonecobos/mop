@@ -3,6 +3,11 @@ mop: Mobility Oriented-Parity Metric
 Marlon E. Cobos, Hannah L. Owens, Jorge Soberón, A. Townsend Peterson
 
 - <a href="#installation" id="toc-installation">Installation</a>
+  - <a href="#install-development-version"
+    id="toc-install-development-version">Install development version</a>
+  - <a href="#install-stable-version-from-cran"
+    id="toc-install-stable-version-from-cran">Install stable version from
+    CRAN</a>
 - <a href="#example" id="toc-example">Example</a>
   - <a href="#running-analyses" id="toc-running-analyses">Running
     analyses</a>
@@ -17,7 +22,7 @@ status](https://github.com/marlonecobos/mop/workflows/R-CMD-check/badge.svg)](ht
 
 <hr>
 
-The package mop contains a set of tools to perform the Mobility
+The package `mop` contains a set of tools to perform the Mobility
 Oriented-Parity (MOP) metric, which helps to compare a set of conditions
 of reference versus another set of of interest. The main goals of the
 MOP metric are to explore conditions in the set of interest that are
@@ -25,20 +30,33 @@ non-analogous to those in the reference set, and to quantify how
 different conditions in the set of interest are. The tools included here
 help to identify conditions outside the rages of the reference set with
 greater detail than in earlier implementations. These tools are based on
-the methods proposed by Owens et al. (2013)
-<doi:10.1016/j.ecolmodel.2013.04.011>.
+the methods proposed by [Owens et
+al. (2013)](https://doi.org/10.1016/j.ecolmodel.2013.04.011).
 
 <br>
 
 ## Installation
 
-You can install the development version of mop from
-[GitHub](https://github.com/marlonecobos/mop) with:
+### Install development version
+
+Before installing `mop`, make sure to obtain the compilation tools
+required: [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for
+Windows, [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+for Mac, and `ggc` or similar compilers in Linux see examples
+[here](https://gcc.gnu.org/install/) or
+[here](https://www.makeuseof.com/how-to-install-c-compiler-linux/).
+
+After that, you can install the development version of `mop` from its
+[GitHub repository](https://github.com/marlonecobos/mop) with:
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("marlonecobos/mop")
 ```
+
+### Install stable version from CRAN
+
+Coming soon…
 
 <br>
 
@@ -127,7 +145,7 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> source      : memory 
+#> source(s)   : memory
 #> name        :       mop 
 #> min value   : 0.3003245 
 #> max value   : 2.1788036 
@@ -138,7 +156,7 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> source      : memory 
+#> source(s)   : memory
 #> name        : mop 
 #> min value   :   1 
 #> max value   :   1 
@@ -149,10 +167,11 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> source      : memory 
-#> name        : mop 
-#> min value   :   1 
-#> max value   :   2 
+#> source(s)   : memory
+#> categories  : n_variables 
+#> name        : n_variables 
+#> min value   :           1 
+#> max value   :           2 
 #> 
 #> MOP detailed:
 #> interpretation_combined:
@@ -171,10 +190,7 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> sources     : memory  
-#>               memory  
-#>               memory  
-#>               ... and 3 more source(s)
+#> source(s)   : memory
 #> names       : bio5, bio6, bio7, bio13, bio14, bio15 
 #> min values  :  NaN,  NaN,  NaN,   NaN,   NaN,     1 
 #> max values  :  NaN,  NaN,  NaN,   NaN,   NaN,     1 
@@ -185,10 +201,7 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> sources     : memory  
-#>               memory  
-#>               memory  
-#>               ... and 3 more source(s)
+#> source(s)   : memory
 #> names       : bio5, bio6, bio7, bio13, bio14, bio15 
 #> min values  :    1,    1,    1,     1,     1,   NaN 
 #> max values  :    1,    1,    1,     1,     1,   NaN 
@@ -199,11 +212,11 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> source      : memory 
+#> source(s)   : memory
 #> categories  : extrapolation_variables 
 #> name        : extrapolation_variables 
-#> min value   :                      NA 
-#> max value   :                      NA 
+#> min value   :                   bio15 
+#> max value   :                   bio15 
 #> 
 #> towards_high_combined:
 #> class       : SpatRaster 
@@ -211,11 +224,11 @@ mop_basic_res
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
-#> source      : memory 
+#> source(s)   : memory
 #> categories  : extrapolation_variables 
 #> name        : extrapolation_variables 
-#> min value   :                      NA 
-#> max value   :                      NA
+#> min value   :                    bio5 
+#> max value   :                   bio14
 ```
 
 <br>
