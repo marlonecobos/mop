@@ -13,44 +13,45 @@
 #'     percentage = 1, comp_each = 2000, rescale_distance = FALSE,
 #'     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 #'
-#' @param m a `SpatRaster` or matrix of variables representing a set of conditions
-#' of reference (e.g., conditions in which a model was calibrated).
+#' @param m a `SpatRaster` or matrix of variables representing a set of
+#' conditions of reference (e.g., conditions in which a model was calibrated).
 #' If a matrix is used, each column represents a variable.
-#' @param g a `SpatRaster` or matrix of variables representing a set of conditions
-#' of interest for which dissimilarity values and non-analogous conditions will
-#' be detected (e.g., conditions in which a model is projected). Variable names
-#' must match between \code{m} and \code{g}.
+#' @param g a `SpatRaster` or matrix of variables representing a set of
+#' conditions of interest for which dissimilarity values and non-analogous
+#' conditions will be detected (e.g., conditions in which a model is projected).
+#' Variable names must match between \code{m} and \code{g}.
 #' @param type `character`, type of MOP analysis to be performed. See `Details`
 #' for options.
-#' @param calculate_distance `logical` whether to calculate distances
+#' @param calculate_distance `logical`, whether to calculate distances
 #' (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
 #' rapidly and does not detect dissimilarity levels.
-#' @param where_distance `character` where to calculate distances, considering
+#' @param where_distance `character`, where to calculate distances, considering
 #' how conditions in \code{g} are positioned in comparison to the range of
 #' conditions in \code{m}. See `Details` for options.
-#' @param distance (character) how distances are calculated, `euclidean` or
+#' @param distance `character`, how distances are calculated, `euclidean` or
 #' `mahalanobis`. Valid if `calculate_distance = TRUE`.
 #' @param scale scaling options `logical` or `numeric-alike` as in
 #' \code{\link[base]{scale}}.
 #' @param center `logical` or `numeric-alike` center options as in
 #' \code{\link[base]{scale}}.
-#' @param fix_NA `logical` whether to fix the layers so cells with NA values
-#' are the same in all layers. Setting to FALSE may save some time if the rasters
-#' are big an have no NA matching problems.
-#' @param percentage `numeric` percentage of \code{m} closest conditions used to
-#' derive mean environmental distances to each combination of conditions in \code{g}.
-#' @param comp_each `numeric` number of combinations in \code{g} to be used for
+#' @param fix_NA `logical`, whether to fix the layers so cells with NA values
+#' are the same in all layers. Setting to FALSE may save some time if the
+#' rasters are big an have no NA matching problems.
+#' @param percentage `numeric`, percentage of \code{m} closest conditions used
+#' to derive mean environmental distances to each combination of conditions in
+#' \code{g}.
+#' @param comp_each `numeric`, number of combinations in \code{g} to be used for
 #' distance calculations at a time. Increasing this number requires more RAM.
-#' @param rescale_distance `logical` whether or not to re-scale distances 0-1.
-#' Re-scaling prevents comparisons of dissimilarity values obtained from runs with
-#' different values of \code{percentage}.
-#' @param parallel `logical` should calculations be performed in parallel
+#' @param rescale_distance `logical`, whether or not to re-scale distances 0-1.
+#' Re-scaling prevents comparisons of dissimilarity values obtained from runs
+#' with different values of \code{percentage}.
+#' @param parallel `logical`, should calculations be performed in parallel
 #' using \code{n_cores} of the computer. Using this option will speed up the
 #' analysis but will demand more RAM.
-#' @param n_cores `numeric` number of cores to be used in parallel processing.
+#' @param n_cores `numeric`, number of cores to be used in parallel processing.
 #' If `parallel = TRUE` and `n_cores = NULL` (all CPU cores on current host - 1)
 #' will be used.
-#' @param progress_bar (logical) whether to show a progress bar.
+#' @param progress_bar `logical`, whether to show a progress bar.
 #'
 #' @details
 #' `type` options return results that differ in the detail of how non-analogous

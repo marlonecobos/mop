@@ -11,27 +11,27 @@ mop(m, g, type = "basic",  calculate_distance = FALSE,
     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 }
 \arguments{
-\item{m}{a \code{SpatRaster} or matrix of variables representing a set of conditions
-of reference (e.g., conditions in which a model was calibrated).
+\item{m}{a \code{SpatRaster} or matrix of variables representing a set of
+conditions of reference (e.g., conditions in which a model was calibrated).
 If a matrix is used, each column represents a variable.}
 
-\item{g}{a \code{SpatRaster} or matrix of variables representing a set of conditions
-of interest for which dissimilarity values and non-analogous conditions will
-be detected (e.g., conditions in which a model is projected). Variable names
-must match between \code{m} and \code{g}.}
+\item{g}{a \code{SpatRaster} or matrix of variables representing a set of
+conditions of interest for which dissimilarity values and non-analogous
+conditions will be detected (e.g., conditions in which a model is projected).
+Variable names must match between \code{m} and \code{g}.}
 
 \item{type}{\code{character}, type of MOP analysis to be performed. See \code{Details}
 for options.}
 
-\item{calculate_distance}{\code{logical} whether to calculate distances
+\item{calculate_distance}{\code{logical}, whether to calculate distances
 (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
 rapidly and does not detect dissimilarity levels.}
 
-\item{where_distance}{\code{character} where to calculate distances, considering
+\item{where_distance}{\code{character}, where to calculate distances, considering
 how conditions in \code{g} are positioned in comparison to the range of
 conditions in \code{m}. See \code{Details} for options.}
 
-\item{distance}{(character) how distances are calculated, \code{euclidean} or
+\item{distance}{\code{character}, how distances are calculated, \code{euclidean} or
 \code{mahalanobis}. Valid if \code{calculate_distance = TRUE}.}
 
 \item{scale}{scaling options \code{logical} or \code{numeric-alike} as in
@@ -40,29 +40,30 @@ conditions in \code{m}. See \code{Details} for options.}
 \item{center}{\code{logical} or \code{numeric-alike} center options as in
 \code{\link[base]{scale}}.}
 
-\item{fix_NA}{\code{logical} whether to fix the layers so cells with NA values
-are the same in all layers. Setting to FALSE may save some time if the rasters
-are big an have no NA matching problems.}
+\item{fix_NA}{\code{logical}, whether to fix the layers so cells with NA values
+are the same in all layers. Setting to FALSE may save some time if the
+rasters are big an have no NA matching problems.}
 
-\item{percentage}{\code{numeric} percentage of \code{m} closest conditions used to
-derive mean environmental distances to each combination of conditions in \code{g}.}
+\item{percentage}{\code{numeric}, percentage of \code{m} closest conditions used
+to derive mean environmental distances to each combination of conditions in
+\code{g}.}
 
-\item{comp_each}{\code{numeric} number of combinations in \code{g} to be used for
+\item{comp_each}{\code{numeric}, number of combinations in \code{g} to be used for
 distance calculations at a time. Increasing this number requires more RAM.}
 
-\item{rescale_distance}{\code{logical} whether or not to re-scale distances 0-1.
-Re-scaling prevents comparisons of dissimilarity values obtained from runs with
-different values of \code{percentage}.}
+\item{rescale_distance}{\code{logical}, whether or not to re-scale distances 0-1.
+Re-scaling prevents comparisons of dissimilarity values obtained from runs
+with different values of \code{percentage}.}
 
-\item{parallel}{\code{logical} should calculations be performed in parallel
+\item{parallel}{\code{logical}, should calculations be performed in parallel
 using \code{n_cores} of the computer. Using this option will speed up the
 analysis but will demand more RAM.}
 
-\item{n_cores}{\code{numeric} number of cores to be used in parallel processing.
+\item{n_cores}{\code{numeric}, number of cores to be used in parallel processing.
 If \code{parallel = TRUE} and \code{n_cores = NULL} (all CPU cores on current host - 1)
 will be used.}
 
-\item{progress_bar}{(logical) whether to show a progress bar.}
+\item{progress_bar}{\code{logical}, whether to show a progress bar.}
 }
 \value{
 A object of class \code{\link{mop_results}} containing:

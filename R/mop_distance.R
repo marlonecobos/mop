@@ -15,19 +15,19 @@
 #' compared against the reference conditions (where distances are to be
 #' calculated). Each column represents a variable. Variable names must match
 #' those in \code{m_matrix}.
-#' @param distance (character) one of the options: "euclidean" or "mahalanobis".
-#' @param percentage (numeric) percentage of points of m (the closest ones)
+#' @param distance `character`, one of the options: "euclidean" or "mahalanobis".
+#' @param percentage `numeric`, percentage of points of m (the closest ones)
 #' used to derive mean environmental distances to each g point.
-#' @param comp_each (numeric) number of points of the g matrix to be used for
+#' @param comp_each `numeric`, number of points of the g matrix to be used for
 #' distance calculations at a time (default = 2000). Increasing this number
 #' requires more RAM.
-#' @param parallel (logical) if TRUE, calculations will be performed in parallel
+#' @param parallel `logical`, if TRUE, calculations will be performed in parallel
 #' using \code{n_cores} of the computer. Using this option will speed up the
 #' analysis  but will demand more RAM.
-#' @param n_cores (numeric) number of cores to be used in parallel processing.
+#' @param n_cores `numeric`, number of cores to be used in parallel processing.
 #' Uses current host CPU cores - 1 by default.
-#' @param progress_bar (logical) whether to show a progress bar for calculations,
-#' Valid when calculations are not run in parallel.
+#' @param progress_bar `logical`, whether to show a progress bar for
+#' calculations. Valid when calculations are not run in parallel.
 #'
 #' @return
 #' A numeric vector with values of distances calculated according to

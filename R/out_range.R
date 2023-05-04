@@ -8,13 +8,13 @@
 #' @usage
 #' out_range(m_matrix, g_matrix, type = "basic")
 #'
-#' @param m_matrix `matrix` of variables representing the set of conditions to be
+#' @param m_matrix matrix of variables representing the set of conditions to be
 #' used as reference. Each column represents a variable.
-#' @param g_matrix `matrix` of variables representing the set of conditions to be
+#' @param g_matrix matrix of variables representing the set of conditions to be
 #' compared against the reference conditions (where conditions outside range
 #' are to be detected). Each column represents a variable. Variable names must
 #' match those in \code{m_matrix}.
-#' @param type `character` type of identification to be performed. See `Details`
+#' @param type `character`, type of identification to be performed. See `Details`
 #' for options.
 #'
 #' @details

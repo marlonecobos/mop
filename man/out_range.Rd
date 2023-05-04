@@ -7,15 +7,15 @@
 out_range(m_matrix, g_matrix, type = "basic")
 }
 \arguments{
-\item{m_matrix}{\code{matrix} of variables representing the set of conditions to be
+\item{m_matrix}{matrix of variables representing the set of conditions to be
 used as reference. Each column represents a variable.}
 
-\item{g_matrix}{\code{matrix} of variables representing the set of conditions to be
+\item{g_matrix}{matrix of variables representing the set of conditions to be
 compared against the reference conditions (where conditions outside range
 are to be detected). Each column represents a variable. Variable names must
 match those in \code{m_matrix}.}
 
-\item{type}{\code{character} type of identification to be performed. See \code{Details}
+\item{type}{\code{character}, type of identification to be performed. See \code{Details}
 for options.}
 }
 \value{
