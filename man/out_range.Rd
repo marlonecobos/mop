@@ -19,9 +19,10 @@ match those in \code{m_matrix}.}
 for options.}
 }
 \value{
-A list with results from analysis according to \code{type}, and table to help
-with interpretations. NA values represent conditions of interest inside
-ranges of reference conditions. See \code{Details}.
+A list containing the ranges in \code{m_matrix}, results from analysis
+according to \code{type}, and table to help with interpretations. NA values
+represent conditions of interest inside ranges of reference conditions.
+See \code{Details}.
 }
 \description{
 Options to identify which values in a set of conditions of interest

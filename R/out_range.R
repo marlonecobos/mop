@@ -37,9 +37,10 @@
 #'     considered in combined results.
 #'
 #' @return
-#' A list with results from analysis according to \code{type}, and table to help
-#' with interpretations. NA values represent conditions of interest inside
-#' ranges of reference conditions. See `Details`.
+#' A list containing the ranges in \code{m_matrix}, results from analysis
+#' according to \code{type}, and table to help with interpretations. NA values
+#' represent conditions of interest inside ranges of reference conditions.
+#' See `Details`.
 #'
 #' @export
 #'
@@ -79,7 +80,8 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
   nvar <- length(var_names)
 
   # defining range of what is inside M realms
-  m_range <- apply(m_matrix, 2, range)
+  m_range <- apply(m_matrix, 2, range)  # RETURN THIS RESULTS (MAKE IT WORK WITH ONE VARIABLE?)
+  rownames(m_range) <- c("min", "max")
 
   # what is out basic and simple
   ## basic
@@ -143,8 +145,8 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
   out[!wout] <- NA
 
   # returning results
-  return(list(basic = out, simple = out1, high_all = outh, low_all = outl,
-              high_combined = outh1, low_combined = outl1,
+  return(list(m_ranges = m_range, basic = out, simple = out1, high_all = outh,
+              low_all = outl, high_combined = outh1, low_combined = outl1,
               interpretation = inter_table))
 }
 

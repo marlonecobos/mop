@@ -77,17 +77,23 @@
 #' A object of class \code{\link{mop_results}} containing:
 #' - **summary** - a list with details on the data used in the analysis:
 #'     - *variables* - name of variables considered.
+#'     - *type* - type of MOP analysis performed.
+#'     - *scale* - value according to the argument \code{scale}.
+#'     - *center* - value according to the argument \code{center}.
 #'     - *calculate_distance* - value according to the argument
 #'     \code{calculate_distance}.
 #'     - *distance* - option of distance used.
 #'     - *percentage* - percentage of \code{m} used as reference for
 #'     distance calculation.
-#'     - *type* - type of MOP analysis performed.
+#'     - *rescale_distance* - value according to the argument
+#'     \code{rescale_distance}.
 #'     - *fix_NA* - value according to the argument \code{fix_NA}.
 #'     - *N_m* - total number of elements (cells with values or valid
 #'     rows) in \code{m}.
 #'     - *N_g* - total number of elements (cells with values or valid
 #'     rows) in \code{g}.
+#'     - *m_ranges* - matrix with ranges of variables in reference conditions
+#'     (\code{m}).
 #' - **mop_distances** - if \code{calculate_distance} = TRUE, a SpatRaster or
 #' vector with distance values for the set of interest (\code{g}). Higher values
 #' represent more dissimilarity compared to the set of reference (\code{m}).
@@ -336,10 +342,12 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
 
   # returning results
   results <- new_mop_results(
-    summary = list(variables = var_names,
-                   calculate_distance = calculate_distance,
-                   distance = distance, percentage = percentage, type = type,
-                   fix_NA = fix_NA, N_m = nm, N_g = ng),
+    summary = list(variables = var_names, type = type, scale = scale,
+                   center = center, calculate_distance = calculate_distance,
+                   distance = distance, percentage = percentage,
+                   rescale_distance = rescale_distance,
+                   fix_NA = fix_NA, N_m = nm, N_g = ng,
+                   m_ranges = out_ranges$m_ranges),
     mop_distances = mop1, mop_basic = mop, mop_simple = mop2,
     mop_detailed = list(
       interpretation_combined = out_ranges$interpretation,

@@ -71,17 +71,23 @@ A object of class \code{\link{mop_results}} containing:
 \item \strong{summary} - a list with details on the data used in the analysis:
 \itemize{
 \item \emph{variables} - name of variables considered.
+\item \emph{type} - type of MOP analysis performed.
+\item \emph{scale} - value according to the argument \code{scale}.
+\item \emph{center} - value according to the argument \code{center}.
 \item \emph{calculate_distance} - value according to the argument
 \code{calculate_distance}.
 \item \emph{distance} - option of distance used.
 \item \emph{percentage} - percentage of \code{m} used as reference for
 distance calculation.
-\item \emph{type} - type of MOP analysis performed.
+\item \emph{rescale_distance} - value according to the argument
+\code{rescale_distance}.
 \item \emph{fix_NA} - value according to the argument \code{fix_NA}.
 \item \emph{N_m} - total number of elements (cells with values or valid
 rows) in \code{m}.
 \item \emph{N_g} - total number of elements (cells with values or valid
 rows) in \code{g}.
+\item \emph{m_ranges} - matrix with ranges of variables in reference conditions
+(\code{m}).
 }
 \item \strong{mop_distances} - if \code{calculate_distance} = TRUE, a SpatRaster or
 vector with distance values for the set of interest (\code{g}). Higher values

@@ -81,9 +81,11 @@ summary.mop_results <- function(object, ...) {
 
   cat("\n                        Summary of MOP resuls\n")
   cat("---------------------------------------------------------------------------\n\n")
-  cat("MOP summary:\nVariables\n")
-  cat(paste(object$summary$variables, collapse = ", "), "\n\n")
-  print(as.data.frame(object$summary[-1]))
+  cat("MOP summary:\nValues\n")
+  print(as.data.frame(object$summary[c(-1, -12)]))
+
+  cat("\nReference conditions\n")
+  print(object$summary$m_ranges)
 
   if (!is.null(object$mop_distances)) {
     cat("\n\nDistances:\n")
