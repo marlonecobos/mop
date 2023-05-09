@@ -12,7 +12,7 @@ Authors@R: c(
     person("A. Townsend", "Peterson", email = "town@ku.edu", role = "aut",
     comment = c(ORCID = "0000-0003-0243-2379")))
 Maintainer: Marlon E. Cobos <manubio13@gmail.com>
-Date: 2023-05-04
+Date: 2023-05-09
 Description: A set of tools to perform the multiple versions of the Mobility
     Oriented-Parity metric. This multivariate analysis helps to characterize 
     levels of dissimilarity between a set of conditions of reference and another
