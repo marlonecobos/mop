@@ -326,7 +326,8 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
   if (calculate_distance) {
     ### re-scaling if needed
     if (rescale_distance == TRUE) {
-      out_ranges$basic[reduced] <- mop1 / max(mop1)
+      minmop <- min(mop1)
+      out_ranges$basic[reduced] <- (mop1 - minmop) / (max(mop1) - minmop)
       out_ranges$basic[!reduced] <- NA
     } else {
       out_ranges$basic[reduced] <- mop1
