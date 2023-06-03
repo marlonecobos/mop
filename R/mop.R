@@ -3,8 +3,8 @@
 #' @description
 #' Analysis to calculate the mobility-oriented parity metric and other
 #' sub-products to represent dissimilarities and non-analogous conditions
-#' when comparing a set of conditions of reference (\code{m}) against another
-#' set of conditions of interest (\code{g}).
+#' when comparing a set of reference conditions (M; \code{m}) against another
+#' set of conditions of interest (G; \code{g}).
 #'
 #' @usage
 #' mop(m, g, type = "basic",  calculate_distance = FALSE,
@@ -14,8 +14,8 @@
 #'     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 #'
 #' @param m a `SpatRaster` or matrix of variables representing a set of
-#' conditions of reference (e.g., conditions in which a model was calibrated).
-#' If a matrix is used, each column represents a variable.
+#' conditions of reference (e.g., the set of conditions in which a model was
+#' calibrated). If a matrix is used, each column represents a variable.
 #' @param g a `SpatRaster` or matrix of variables representing a set of
 #' conditions of interest for which dissimilarity values and non-analogous
 #' conditions will be detected (e.g., conditions in which a model is projected).
@@ -24,19 +24,19 @@
 #' for options.
 #' @param calculate_distance `logical`, whether to calculate distances
 #' (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
-#' rapidly and does not detect dissimilarity levels.
+#' rapidly and does not assess dissimilarity levels.
 #' @param where_distance `character`, where to calculate distances, considering
 #' how conditions in \code{g} are positioned in comparison to the range of
 #' conditions in \code{m}. See `Details` for options.
-#' @param distance `character`, how distances are calculated, `euclidean` or
+#' @param distance `character`, which distances are calculated, `euclidean` or
 #' `mahalanobis`. Valid if `calculate_distance = TRUE`.
-#' @param scale scaling options `logical` or `numeric-alike` as in
+#' @param scale scaling options, `logical` or `numeric-alike` as in
 #' \code{\link[base]{scale}}.
 #' @param center `logical` or `numeric-alike` center options as in
 #' \code{\link[base]{scale}}.
-#' @param fix_NA `logical`, whether to fix the layers so cells with NA values
-#' are the same in all layers. Setting to FALSE may save some time if the
-#' rasters are big an have no NA matching problems.
+#' @param fix_NA `logical`, whether to fix layers so cells with NA values
+#' are the same in all layers. Setting to FALSE may save time if the
+#' rasters are big and have no NA matching problems.
 #' @param percentage `numeric`, percentage of \code{m} closest conditions used
 #' to derive mean environmental distances to each combination of conditions in
 #' \code{g}.
@@ -45,9 +45,9 @@
 #' @param rescale_distance `logical`, whether or not to re-scale distances 0-1.
 #' Re-scaling prevents comparisons of dissimilarity values obtained from runs
 #' with different values of \code{percentage}.
-#' @param parallel `logical`, should calculations be performed in parallel
-#' using \code{n_cores} of the computer. Using this option will speed up the
-#' analysis but will demand more RAM.
+#' @param parallel `logical`, whether calculations should be performed in
+#' parallel using \code{n_cores} of the computer. Using this option will speed
+#' up the analysis but will demand more RAM.
 #' @param n_cores `numeric`, number of cores to be used in parallel processing.
 #' If `parallel = TRUE` and `n_cores = NULL` (all CPU cores on current host - 1)
 #' will be used.
@@ -70,19 +70,19 @@
 #' - **all** - all conditions
 #'
 #' When the variables used to represent conditions have different units,
-#' scaling and centering is recommended. This is only valid when Euclidean
+#' scaling and centering are recommended. This step is only valid when Euclidean
 #' distances are used.
 #'
 #' @return
 #' A object of class \code{\link{mop_results}} containing:
-#' - **summary** - a list with details on the data used in the analysis:
-#'     - *variables* - name of variables considered.
+#' - **summary** - a list with details of the data used in the analysis:
+#'     - *variables* - names of variables considered.
 #'     - *type* - type of MOP analysis performed.
 #'     - *scale* - value according to the argument \code{scale}.
 #'     - *center* - value according to the argument \code{center}.
 #'     - *calculate_distance* - value according to the argument
 #'     \code{calculate_distance}.
-#'     - *distance* - option of distance used.
+#'     - *distance* - option regarding distance used.
 #'     - *percentage* - percentage of \code{m} used as reference for
 #'     distance calculation.
 #'     - *rescale_distance* - value according to the argument
@@ -96,7 +96,7 @@
 #'     (\code{m}).
 #' - **mop_distances** - if \code{calculate_distance} = TRUE, a SpatRaster or
 #' vector with distance values for the set of interest (\code{g}). Higher values
-#' represent more dissimilarity compared to the set of reference (\code{m}).
+#' represent greater dissimilarity compared to the set of reference (\code{m}).
 #' - **mop_basic** - a SpatRaster or vector, for the set of interest,
 #' representing conditions in which at least one of the variables is
 #' non-analogous to the set of reference. Values should be: 1 for non-analogous

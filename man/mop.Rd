@@ -12,8 +12,8 @@ mop(m, g, type = "basic",  calculate_distance = FALSE,
 }
 \arguments{
 \item{m}{a \code{SpatRaster} or matrix of variables representing a set of
-conditions of reference (e.g., conditions in which a model was calibrated).
-If a matrix is used, each column represents a variable.}
+conditions of reference (e.g., the set of conditions in which a model was
+calibrated). If a matrix is used, each column represents a variable.}
 
 \item{g}{a \code{SpatRaster} or matrix of variables representing a set of
 conditions of interest for which dissimilarity values and non-analogous
@@ -25,24 +25,24 @@ for options.}
 
 \item{calculate_distance}{\code{logical}, whether to calculate distances
 (dissimilarities) between \code{m} and \code{g}. The default, FALSE, runs
-rapidly and does not detect dissimilarity levels.}
+rapidly and does not assess dissimilarity levels.}
 
 \item{where_distance}{\code{character}, where to calculate distances, considering
 how conditions in \code{g} are positioned in comparison to the range of
 conditions in \code{m}. See \code{Details} for options.}
 
-\item{distance}{\code{character}, how distances are calculated, \code{euclidean} or
+\item{distance}{\code{character}, which distances are calculated, \code{euclidean} or
 \code{mahalanobis}. Valid if \code{calculate_distance = TRUE}.}
 
-\item{scale}{scaling options \code{logical} or \code{numeric-alike} as in
+\item{scale}{scaling options, \code{logical} or \code{numeric-alike} as in
 \code{\link[base]{scale}}.}
 
 \item{center}{\code{logical} or \code{numeric-alike} center options as in
 \code{\link[base]{scale}}.}
 
-\item{fix_NA}{\code{logical}, whether to fix the layers so cells with NA values
-are the same in all layers. Setting to FALSE may save some time if the
-rasters are big an have no NA matching problems.}
+\item{fix_NA}{\code{logical}, whether to fix layers so cells with NA values
+are the same in all layers. Setting to FALSE may save time if the
+rasters are big and have no NA matching problems.}
 
 \item{percentage}{\code{numeric}, percentage of \code{m} closest conditions used
 to derive mean environmental distances to each combination of conditions in
@@ -55,9 +55,9 @@ distance calculations at a time. Increasing this number requires more RAM.}
 Re-scaling prevents comparisons of dissimilarity values obtained from runs
 with different values of \code{percentage}.}
 
-\item{parallel}{\code{logical}, should calculations be performed in parallel
-using \code{n_cores} of the computer. Using this option will speed up the
-analysis but will demand more RAM.}
+\item{parallel}{\code{logical}, whether calculations should be performed in
+parallel using \code{n_cores} of the computer. Using this option will speed
+up the analysis but will demand more RAM.}
 
 \item{n_cores}{\code{numeric}, number of cores to be used in parallel processing.
 If \code{parallel = TRUE} and \code{n_cores = NULL} (all CPU cores on current host - 1)
@@ -68,15 +68,15 @@ will be used.}
 \value{
 A object of class \code{\link{mop_results}} containing:
 \itemize{
-\item \strong{summary} - a list with details on the data used in the analysis:
+\item \strong{summary} - a list with details of the data used in the analysis:
 \itemize{
-\item \emph{variables} - name of variables considered.
+\item \emph{variables} - names of variables considered.
 \item \emph{type} - type of MOP analysis performed.
 \item \emph{scale} - value according to the argument \code{scale}.
 \item \emph{center} - value according to the argument \code{center}.
 \item \emph{calculate_distance} - value according to the argument
 \code{calculate_distance}.
-\item \emph{distance} - option of distance used.
+\item \emph{distance} - option regarding distance used.
 \item \emph{percentage} - percentage of \code{m} used as reference for
 distance calculation.
 \item \emph{rescale_distance} - value according to the argument
@@ -91,7 +91,7 @@ rows) in \code{g}.
 }
 \item \strong{mop_distances} - if \code{calculate_distance} = TRUE, a SpatRaster or
 vector with distance values for the set of interest (\code{g}). Higher values
-represent more dissimilarity compared to the set of reference (\code{m}).
+represent greater dissimilarity compared to the set of reference (\code{m}).
 \item \strong{mop_basic} - a SpatRaster or vector, for the set of interest,
 representing conditions in which at least one of the variables is
 non-analogous to the set of reference. Values should be: 1 for non-analogous
@@ -125,8 +125,8 @@ use of the data.frame \emph{interpretation_combined}.
 \description{
 Analysis to calculate the mobility-oriented parity metric and other
 sub-products to represent dissimilarities and non-analogous conditions
-when comparing a set of conditions of reference (\code{m}) against another
-set of conditions of interest (\code{g}).
+when comparing a set of reference conditions (M; \code{m}) against another
+set of conditions of interest (G; \code{g}).
 }
 \details{
 \code{type} options return results that differ in the detail of how non-analogous
@@ -149,7 +149,7 @@ dissimilarity
 }
 
 When the variables used to represent conditions have different units,
-scaling and centering is recommended. This is only valid when Euclidean
+scaling and centering are recommended. This step is only valid when Euclidean
 distances are used.
 }
 \examples{

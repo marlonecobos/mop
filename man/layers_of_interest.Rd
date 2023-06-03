@@ -7,8 +7,8 @@
 A \code{SpatRaster} object.
 }
 \value{
-No return value, used with function \code{\link[terra]{rast}} to
-bring raster variables used in analysis.
+No return value. Used with function \code{\link[terra]{rast}} to
+bring raster variables to analysis.
 }
 \description{
 A \code{SpatRaster} object representing variables in a set of interest. Variables

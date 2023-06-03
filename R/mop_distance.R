@@ -15,7 +15,7 @@
 #' compared against the reference conditions (where distances are to be
 #' calculated). Each column represents a variable. Variable names must match
 #' those in \code{m_matrix}.
-#' @param distance `character`, one of the options: "euclidean" or "mahalanobis".
+#' @param distance `character`, one of two options: "euclidean" or "mahalanobis".
 #' @param percentage `numeric`, percentage of points of m (the closest ones)
 #' used to derive mean environmental distances to each g point.
 #' @param comp_each `numeric`, number of points of the g matrix to be used for

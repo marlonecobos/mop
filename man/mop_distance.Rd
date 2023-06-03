@@ -17,7 +17,7 @@ compared against the reference conditions (where distances are to be
 calculated). Each column represents a variable. Variable names must match
 those in \code{m_matrix}.}
 
-\item{distance}{\code{character}, one of the options: "euclidean" or "mahalanobis".}
+\item{distance}{\code{character}, one of two options: "euclidean" or "mahalanobis".}
 
 \item{percentage}{\code{numeric}, percentage of points of m (the closest ones)
 used to derive mean environmental distances to each g point.}

@@ -12,17 +12,17 @@ Authors@R: c(
     person("A. Townsend", "Peterson", email = "town@ku.edu", role = "aut",
     comment = c(ORCID = "0000-0003-0243-2379")))
 Maintainer: Marlon E. Cobos <manubio13@gmail.com>
-Date: 2023-05-09
-Description: A set of tools to perform the multiple versions of the Mobility
+Date: 2023-06-03
+Description: A set of tools to perform multiple versions of the Mobility
     Oriented-Parity metric. This multivariate analysis helps to characterize 
     levels of dissimilarity between a set of conditions of reference and another
-    set of conditions of interest. If predictive models are projected to 
-    conditions different to the ones in which models were calibrated (trained),
-    this metric helps to identify projection conditions that differ 
+    set of conditions of interest. If predictive models are transferred to 
+    conditions different from those over which models were calibrated (trained),
+    this metric helps to identify transfer conditions that differ 
     substantially from those of calibration. These tools are implemented 
     following principles proposed in Owens et al. (2013) 
     <doi:10.1016/j.ecolmodel.2013.04.011>, and expanded to obtain more detailed 
-    results that help with interpretations.
+    results that aid in interpretation.
 URL: https://github.com/marlonecobos/mop
 BugReports: https://github.com/marlonecobos/mop/issues
 Imports:

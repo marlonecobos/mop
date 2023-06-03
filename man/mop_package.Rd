@@ -5,18 +5,18 @@
 \alias{mop_package}
 \title{mop: Mobility Oriented-Parity Metric}
 \description{
-\code{mop} contains a set of tools to perform the Mobility Oriented-Parity metric,
-which helps to compare a set of conditions of reference versus another set of
-of interest.
+\code{mop} contains a set of tools to calculate the Mobility Oriented-Parity
+metric, which allows a user to compare a set of conditions of reference
+versus another set of of interest.
 }
 \details{
 The main goals of the MOP metric are to explore conditions in the set of
 interest that are non-analogous to those in the reference set, and to
-quantify how different conditions in the set of interest are. The tools
-included here help to identify conditions outside the ranges of the
-reference set with greater detail than in other implementations. These tools
-are based on the methods proposed by Owens et al. (2013)
-\url{doi:10.1016/j.ecolmodel.2013.04.011}.
+quantify how different conditions in the set of interest are from the
+reference set. The tools included here help to identify conditions outside
+the ranges of the reference set with greater detail than in other
+implementations. These tools are based on the methods proposed by
+Owens et al. (2013; \url{doi:10.1016/j.ecolmodel.2013.04.011}).
 }
 \section{Functions in mop}{
 

@@ -20,10 +20,10 @@
 #' @details
 #' Results are produced according to \code{type}:
 #' - **basic** - helps to identify conditions outside ranges, in general, one or
-#' variables are only counted as \code{1}. This is returned always.
-#' - **simple** - identifies number of variables with conditions outside ranges,
-#' for in condition of interest the number of non-analogous variables is
-#' returned
+#' variables are only counted as \code{1}. This is always returned.
+#' - **simple** - identifies the number of variables with conditions outside
+#' ranges, for each condition of interest outside ranges, the number of
+#' non-analogous variables is returned.
 #' - **detailed** - produces various results (including the two above):
 #'     - *high_all* - identifies non-analogous conditions towards high values of
 #'     variables, for each variable independently.

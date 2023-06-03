@@ -36,8 +36,8 @@
 #'
 #' @name reference_layers
 #'
-#' @return No return value, used with function \code{\link[terra]{rast}} to
-#' bring raster variables used in analysis.
+#' @return No return value. Used with function \code{\link[terra]{rast}} to
+#' bring raster variables to analysis.
 #'
 #' @examples
 #' reference_layers <- terra::rast(system.file("extdata", "reference_layers.tif",
@@ -58,8 +58,8 @@ NULL
 #'
 #' @name layers_of_interest
 #'
-#' @return No return value, used with function \code{\link[terra]{rast}} to
-#' bring raster variables used in analysis.
+#' @return No return value. Used with function \code{\link[terra]{rast}} to
+#' bring raster variables to analysis.
 #'
 #' @examples
 #' layers_of_interest <- terra::rast(system.file("extdata",
