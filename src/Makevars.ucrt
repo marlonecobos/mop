@@ -1,0 +1,8 @@
+TARGET = lib$(subst gcc,,$(COMPILED_BY))$(R_ARCH)
+
+LIBSHARPYUV = $(or $(and $(wildcard $(R_TOOLS_SOFT)/lib/libsharpyuv.a),-lsharpyuv),)
+
+PKG_LIBS =  \
+$(LIBSHARPYUV)
+
+CXX_STD = CXX
