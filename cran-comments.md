@@ -1,9 +1,9 @@
-## V 0.1.0 first submission
+## V 0.1.1 first submission
 
 This is a new release.
 
 ## Test environments
-* Ubuntu 22.04 LTS, R 4.2.2 (local)
+* Ubuntu 22.04 LTS, R 4.3.0 (local)
 * MacOS 12.6.5, R release (GitHub Actions)
 * Windows 10.0.20348, R release (GitHub Actions)
 * Ubuntu 22.04 LTS, R release (GitHub Actions)
