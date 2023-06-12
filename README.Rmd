@@ -25,22 +25,26 @@ The package `mop` contains a set of tools to perform the Mobility Oriented-Parit
 
 ## Installation
 
+### Install stable version from CRAN
+
+To install the stable version of `mop` use:
+
+```{r install_cran, eval=FALSE}
+install.packages("mop")
+```
+
+<br>
+
 ### Install development version
 
 Before installing `mop`, make sure to obtain the compilation tools required: [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows, [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) for Mac, and `ggc` or similar compilers in Linux, see examples [here](https://gcc.gnu.org/install/) or [here](https://www.makeuseof.com/how-to-install-c-compiler-linux/). 
 
 After that, you can install the development version of `mop` from its [GitHub repository](https://github.com/marlonecobos/mop) with:
 
-```{r install, eval=FALSE}
+```{r install_gh, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("marlonecobos/mop")
 ```
-
-<br>
-
-### Install stable version from CRAN
-
-Coming soon...
 
 <br>
 
