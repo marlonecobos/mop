@@ -35,8 +35,6 @@
 #'
 #' @export
 #'
-#' @exportPattern ˆ[[:alpha:]]+
-#'
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom stats mahalanobis cov
 #' @importFrom parallel detectCores

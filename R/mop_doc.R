@@ -22,6 +22,4 @@
 #' \code{\link{reference_matrix}}, \code{\link{matrix_of_interest}},
 #' \code{\link{reference_layers}}, \code{\link{layers_of_interest}}
 #'
-#' @docType package
-#' @name mop_package
-NULL
+"_PACKAGE"
