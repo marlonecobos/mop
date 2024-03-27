@@ -2,17 +2,13 @@ mop: Mobility Oriented-Parity Metric
 ================
 Marlon E. Cobos, Hannah L. Owens, Jorge Soberón, A. Townsend Peterson
 
-- <a href="#installation" id="toc-installation">Installation</a>
-  - <a href="#install-stable-version-from-cran"
-    id="toc-install-stable-version-from-cran">Install stable version from
-    CRAN</a>
-  - <a href="#install-development-version"
-    id="toc-install-development-version">Install development version</a>
-- <a href="#example" id="toc-example">Example</a>
-  - <a href="#running-analyses" id="toc-running-analyses">Running
-    analyses</a>
-  - <a href="#plotting-results" id="toc-plotting-results">Plotting
-    results</a>
+- [Installation](#installation)
+  - [Install stable version from
+    CRAN](#install-stable-version-from-cran)
+  - [Install development version](#install-development-version)
+- [Example](#example)
+  - [Running analyses](#running-analyses)
+  - [Plotting results](#plotting-results)
 
 <!-- badges: start -->
 
@@ -49,10 +45,11 @@ install.packages("mop")
 
 ### Install development version
 
-Before installing `mop`, make sure to obtain the compilation tools
-required: [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for
-Windows, [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-for Mac, and `ggc` or similar compilers in Linux, see examples
+Before installing the development version of `mop`, make sure to obtain
+the compilation tools required:
+[Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows,
+[Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) for Mac,
+and `ggc` or similar compilers in Linux, see examples
 [here](https://gcc.gnu.org/install/) or
 [here](https://www.makeuseof.com/how-to-install-c-compiler-linux/).
 

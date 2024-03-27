@@ -37,7 +37,7 @@ install.packages("mop")
 
 ### Install development version
 
-Before installing `mop`, make sure to obtain the compilation tools required: [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows, [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) for Mac, and `ggc` or similar compilers in Linux, see examples [here](https://gcc.gnu.org/install/) or [here](https://www.makeuseof.com/how-to-install-c-compiler-linux/). 
+Before installing the development version of `mop`, make sure to obtain the compilation tools required: [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows, [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) for Mac, and `ggc` or similar compilers in Linux, see examples [here](https://gcc.gnu.org/install/) or [here](https://www.makeuseof.com/how-to-install-c-compiler-linux/). 
 
 After that, you can install the development version of `mop` from its [GitHub repository](https://github.com/marlonecobos/mop) with:
 
