@@ -9,8 +9,8 @@
 #' @usage
 #' mop(m, g, type = "basic",  calculate_distance = FALSE,
 #'     where_distance = "in_range", distance = "euclidean",
-#'     scale = FALSE, center = FALSE, fix_NA = TRUE,
-#'     percentage = 1, comp_each = 2000, rescale_distance = FALSE,
+#'     scale = FALSE, center = FALSE, fix_NA = TRUE, percentage = 1,
+#'     comp_each = 2000, tol = NULL, rescale_distance = FALSE,
 #'     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 #'
 #' @param m a `SpatRaster` or matrix of variables representing a set of
@@ -42,6 +42,8 @@
 #' \code{g}.
 #' @param comp_each `numeric`, number of combinations in \code{g} to be used for
 #' distance calculations at a time. Increasing this number requires more RAM.
+#' @param tol tolerance to detect linear dependencies when calculating
+#' Mahalanobis distances. The default, NULL, uses `.Machine$double.eps`.
 #' @param rescale_distance `logical`, whether or not to re-scale distances 0-1.
 #' Re-scaling prevents comparisons of dissimilarity values obtained from runs
 #' with different values of \code{percentage}.
@@ -149,8 +151,8 @@
 mop <- function(m, g, type = "basic", calculate_distance = FALSE,
                 where_distance = "in_range", distance = "euclidean",
                 scale = FALSE, center = FALSE, fix_NA = TRUE, percentage = 1,
-                comp_each = 2000, rescale_distance = FALSE, parallel = FALSE,
-                n_cores = NULL, progress_bar = TRUE) {
+                comp_each = 2000, tol = NULL, rescale_distance = FALSE,
+                parallel = FALSE, n_cores = NULL, progress_bar = TRUE) {
 
   # initial tests
   if (missing(m) | missing(g)) {
@@ -245,7 +247,7 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
 
   ## analysis
   if (calculate_distance) {
-    mop1 <- mop_distance(m, g[reduced, ], distance, percentage, comp_each,
+    mop1 <- mop_distance(m, g[reduced, ], distance, percentage, comp_each, tol,
                          parallel, n_cores, progress_bar)
   }
 

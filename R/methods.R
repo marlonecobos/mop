@@ -108,7 +108,7 @@ summary.mop_results <- function(object, ...) {
   }
   perc <- frequ / object$summary$N_g
 
-  cat("Percentage = ", round(perc, 3), "% of all contions\n", sep = "")
+  cat("Percentage = ", round(perc, 3), "% of all conditions\n", sep = "")
 
   if (!is.null(object$mop_simple)) {
     if (class(object$mop_basic)[1] == "SpatRaster") {

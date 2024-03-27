@@ -6,8 +6,8 @@
 \usage{
 mop(m, g, type = "basic",  calculate_distance = FALSE,
     where_distance = "in_range", distance = "euclidean",
-    scale = FALSE, center = FALSE, fix_NA = TRUE,
-    percentage = 1, comp_each = 2000, rescale_distance = FALSE,
+    scale = FALSE, center = FALSE, fix_NA = TRUE, percentage = 1,
+    comp_each = 2000, tol = NULL, rescale_distance = FALSE,
     parallel = FALSE, n_cores = NULL, progress_bar = TRUE)
 }
 \arguments{
@@ -50,6 +50,9 @@ to derive mean environmental distances to each combination of conditions in
 
 \item{comp_each}{\code{numeric}, number of combinations in \code{g} to be used for
 distance calculations at a time. Increasing this number requires more RAM.}
+
+\item{tol}{tolerance to detect linear dependencies when calculating
+Mahalanobis distances. The default, NULL, uses \code{.Machine$double.eps}.}
 
 \item{rescale_distance}{\code{logical}, whether or not to re-scale distances 0-1.
 Re-scaling prevents comparisons of dissimilarity values obtained from runs

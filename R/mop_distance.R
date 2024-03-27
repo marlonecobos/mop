@@ -6,7 +6,7 @@
 #'
 #' @usage
 #' mop_distance(m_matrix, g_matrix, distance = "euclidean", percentage = 1,
-#'              comp_each = 2000, parallel = FALSE, n_cores = NULL,
+#'              comp_each = 2000, tol = NULL, parallel = FALSE, n_cores = NULL,
 #'              progress_bar = TRUE)
 #'
 #' @param m_matrix matrix of variables representing the set of conditions to be
@@ -21,6 +21,8 @@
 #' @param comp_each `numeric`, number of points of the g matrix to be used for
 #' distance calculations at a time (default = 2000). Increasing this number
 #' requires more RAM.
+#' @param tol tolerance to detect linear dependencies when calculating
+#' Mahalanobis distances. The default, NULL, uses `.Machine$double.eps`.
 #' @param parallel `logical`, if TRUE, calculations will be performed in parallel
 #' using \code{n_cores} of the computer. Using this option will speed up the
 #' analysis  but will demand more RAM.
@@ -55,8 +57,8 @@
 #'                          g_matrix = matrix_of_interest)
 
 mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
-                         percentage = 1, comp_each = 2000, parallel = FALSE,
-                         n_cores = NULL, progress_bar = TRUE) {
+                         percentage = 1, comp_each = 2000, tol = NULL,
+                         parallel = FALSE, n_cores = NULL, progress_bar = TRUE) {
   # initial tests
   if (missing(m_matrix) | missing(g_matrix)) {
     stop("Arguments 'm_matrix' and 'g_matrix' must be defined.")
@@ -75,6 +77,10 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
 
   if (percentage <= 0 | percentage > 100) {
     stop("'percentage' connot be <= 0 or > 100.")
+  }
+
+  if (is.null(tol)) {
+    tol <- .Machine$double.eps
   }
 
   # preparing groups of points
@@ -110,7 +116,8 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       } else {
         cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
-          stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv)
+          stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv,
+                             tol = tol)
         })
         cdist <- do.call(rbind, cdist)
       }
@@ -157,7 +164,8 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       } else {
         cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
-          stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv)
+          stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv,
+                             tol = tol)
         })
         cdist <- do.call(rbind, cdist)
       }

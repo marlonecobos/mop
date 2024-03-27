@@ -5,7 +5,7 @@
 \title{MOP distance calculation}
 \usage{
 mop_distance(m_matrix, g_matrix, distance = "euclidean", percentage = 1,
-             comp_each = 2000, parallel = FALSE, n_cores = NULL,
+             comp_each = 2000, tol = NULL, parallel = FALSE, n_cores = NULL,
              progress_bar = TRUE)
 }
 \arguments{
@@ -25,6 +25,9 @@ used to derive mean environmental distances to each g point.}
 \item{comp_each}{\code{numeric}, number of points of the g matrix to be used for
 distance calculations at a time (default = 2000). Increasing this number
 requires more RAM.}
+
+\item{tol}{tolerance to detect linear dependencies when calculating
+Mahalanobis distances. The default, NULL, uses \code{.Machine$double.eps}.}
 
 \item{parallel}{\code{logical}, if TRUE, calculations will be performed in parallel
 using \code{n_cores} of the computer. Using this option will speed up the
