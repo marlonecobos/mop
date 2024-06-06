@@ -267,8 +267,11 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
 
     if (clasg == "SpatRaster") {
       valss <- terra::unique(mop2)[, 1]
-      cates <- data.frame(values = valss,
-                          n_variables = as.character(valss))
+      if (is.null(valss)) {
+        cates <- data.frame(values = numeric(), n_variables = character())
+      } else {
+        cates <- data.frame(values = valss, n_variables = as.character(valss))
+      }
       levels(mop2) <- cates
     }
   } else {
