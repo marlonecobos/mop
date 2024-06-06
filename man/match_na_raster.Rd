@@ -14,9 +14,7 @@ matched.}
 A \code{SpatRaster} object with NA cells matching in all layers.
 }
 \description{
-Options to identify which values in a set of conditions of interest
-(\code{g_matrix}) are outside the range of a set of conditions of
-reference (\code{m_matrix}).
+Option to match cells with NA values in a SpatRaster with multiple layers.
 }
 \examples{
 # data
