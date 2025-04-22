@@ -2,6 +2,7 @@ mop: Mobility Oriented-Parity Metric
 ================
 Marlon E. Cobos, Hannah L. Owens, Jorge Soberón, A. Townsend Peterson
 
+- [How to cite](#how-to-cite)
 - [Installation](#installation)
   - [Install stable version from
     CRAN](#install-stable-version-from-cran)
@@ -27,7 +28,21 @@ different conditions in the set of interest are. The tools included here
 help to identify conditions outside the rages of the reference set with
 greater detail than in earlier implementations. These tools are based on
 the methods proposed by [Owens et
-al. (2013)](https://doi.org/10.1016/j.ecolmodel.2013.04.011).
+al. (2013)](https://doi.org/10.1016/j.ecolmodel.2013.04.011) and
+presented in [Cobos et
+al. (2024)](https://biogeography.pensoft.net/article/132916/).
+
+<br>
+
+## How to cite
+
+To cite the methods implemented in this package use:
+
+Cobos ME, Owens HL, Soberón J, Peterson AT (2024) Detailed multivariate
+comparisons of environments with mobility oriented parity. Frontiers of
+Biogeography 17: e132916. <https://doi.org/10.21425/fob.17.132916>
+
+*Big thanks to code contributor:* Dave Slager.
 
 <br>
 
@@ -139,7 +154,7 @@ summary(mop_basic_res)
 #> 
 #> 
 #> Non-analogous conditions (NAC):
-#> Percentage = 0.566% of all contions
+#> Percentage = 0.566% of all conditions
 #> Variables with NAC in 'simple' = 2
 #> 
 #> 
@@ -154,6 +169,7 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varname     : layers_of_interest 
 #> name        :       mop 
 #> min value   : 0.3003245 
 #> max value   : 2.1788036 
@@ -165,6 +181,7 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varname     : layers_of_interest 
 #> name        : mop 
 #> min value   :   1 
 #> max value   :   1 
@@ -176,6 +193,7 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varname     : layers_of_interest 
 #> categories  : n_variables 
 #> name        : n_variables 
 #> min value   :           1 
@@ -199,6 +217,10 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varnames    : layers_of_interest 
+#>               layers_of_interest 
+#>               layers_of_interest 
+#>               ...
 #> names       : bio5, bio6, bio7, bio13, bio14, bio15 
 #> min values  :  NaN,  NaN,  NaN,   NaN,   NaN,     1 
 #> max values  :  NaN,  NaN,  NaN,   NaN,   NaN,     1 
@@ -210,6 +232,10 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varnames    : layers_of_interest 
+#>               layers_of_interest 
+#>               layers_of_interest 
+#>               ...
 #> names       : bio5, bio6, bio7, bio13, bio14, bio15 
 #> min values  :    1,    1,    1,     1,     1,   NaN 
 #> max values  :    1,    1,    1,     1,     1,   NaN 
@@ -221,6 +247,7 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varname     : layers_of_interest 
 #> categories  : extrapolation_variables 
 #> name        : extrapolation_variables 
 #> min value   :                   bio15 
@@ -233,6 +260,7 @@ mop_basic_res
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
+#> varname     : layers_of_interest 
 #> categories  : extrapolation_variables 
 #> name        : extrapolation_variables 
 #> min value   :                    bio5 
