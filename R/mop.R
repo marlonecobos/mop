@@ -268,9 +268,9 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
     if (clasg == "SpatRaster") {
       valss <- terra::unique(mop2)[, 1]
       if (is.null(valss)) {
-        cates <- data.frame(values = numeric(), n_variables = character())
+        cates <- data.frame(id = numeric(), category = character())
       } else {
-        cates <- data.frame(values = valss, n_variables = as.character(valss))
+        cates <- data.frame(id = valss, category = as.character(valss))
       }
       levels(mop2) <- cates
     }
@@ -290,9 +290,11 @@ mop <- function(m, g, type = "basic", calculate_distance = FALSE,
     if (clasg == "SpatRaster") {
       cates <- out_ranges$interpretation
       cates_hc <- cates[cates$values %in% terra::unique(mop4)[, 1], ]
+      colnames(cates_hc) <- c("id", "category")
       levels(mop4) <- cates_hc
 
       cates_lc <- cates[cates$values %in% terra::unique(mop3)[, 1], ]
+      colnames(cates_lc) <- c("id", "category")
       levels(mop3) <- cates_lc
     }
 
