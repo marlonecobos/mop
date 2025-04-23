@@ -1,3 +1,10 @@
+# mop 0.1.3
+
+Column names of the `data.frame` used to define `levels` in categorical 
+`SpatRaster` objects were changed to ("id" and "category") to prevent issues 
+when reading such objects after writing them as raster files in local 
+directories.
+
 # mop 0.1.2
 
 A new argument in `mop` and `mop_distance` (`tol = NULL`) allow users to 
