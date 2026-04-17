@@ -77,14 +77,14 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
 
   # variable names and number
   var_names <- colnames(m_matrix)
-  if (nvar == 1) {
-    m_range <- matrix(m_range, ncol = 1)
-    colnames(m_range) <- var_names
-  }
   nvar <- length(var_names)
 
   # defining range of what is inside M realms
   m_range <- apply(m_matrix, 2, range)
+  if (nvar == 1) {
+    m_range <- matrix(m_range, ncol = 1)
+    colnames(m_range) <- var_names
+  }
   rownames(m_range) <- c("min", "max")
 
   # what is out basic and simple
