@@ -103,7 +103,7 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
 
   # what is out in more detail
   if (type == "detailed") {
-    mul <- 10^(1:nvar)
+    mul <- 2^(1:nvar)
 
     ### which lower end
     outl <- sapply(1:nvar, function(x) {
