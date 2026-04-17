@@ -5,4 +5,4 @@ LIBSHARPYUV = $(or $(and $(wildcard $(R_TOOLS_SOFT)/lib/libsharpyuv.a),-lsharpyu
 PKG_LIBS =  \
 $(LIBSHARPYUV)
 
-CXX_STD = CXX
+CXX_STD = CXX11
