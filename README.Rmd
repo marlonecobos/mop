@@ -29,6 +29,8 @@ To cite the methods implemented in this package use:
 
 Cobos ME, Owens HL, Soberón J, Peterson AT (2024) Detailed multivariate comparisons of environments with mobility oriented parity. Frontiers of Biogeography 17: e132916. https://doi.org/10.21425/fob.17.132916
 
+<br>
+
 *Big thanks to code contributor:* Dave Slager.
 
 <br>

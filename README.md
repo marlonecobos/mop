@@ -42,6 +42,8 @@ Cobos ME, Owens HL, Soberón J, Peterson AT (2024) Detailed multivariate
 comparisons of environments with mobility oriented parity. Frontiers of
 Biogeography 17: e132916. <https://doi.org/10.21425/fob.17.132916>
 
+<br>
+
 *Big thanks to code contributor:* Dave Slager.
 
 <br>
@@ -102,7 +104,7 @@ layers_of_interest <- terra::rast(system.file("extdata",
 terra::plot(reference_layers)
 ```
 
-<img src="man/figures/README-load-1.png" width="100%" />
+<img src="man/figures/README-load-1.png" alt="" width="100%" />
 
 ``` r
 
@@ -110,7 +112,7 @@ terra::plot(reference_layers)
 terra::plot(layers_of_interest)
 ```
 
-<img src="man/figures/README-load-2.png" width="100%" />
+<img src="man/figures/README-load-2.png" alt="" width="100%" />
 
 <br>
 
@@ -164,7 +166,7 @@ summary(mop_basic_res)
 mop_basic_res
 #> MOP distances:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 1  (nrow, ncol, nlyr)
+#> size        : 39, 36, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
@@ -176,7 +178,7 @@ mop_basic_res
 #> 
 #> MOP basic:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 1  (nrow, ncol, nlyr)
+#> size        : 39, 36, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
@@ -188,16 +190,16 @@ mop_basic_res
 #> 
 #> MOP simple:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 1  (nrow, ncol, nlyr)
+#> size        : 39, 36, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
 #> varname     : layers_of_interest 
-#> categories  : n_variables 
-#> name        : n_variables 
-#> min value   :           1 
-#> max value   :           2 
+#> categories  : category 
+#> name        : category 
+#> min value   :        1 
+#> max value   :        2 
 #> 
 #> MOP detailed:
 #> interpretation_combined:
@@ -212,7 +214,7 @@ mop_basic_res
 #> 
 #> towards_low_end:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 6  (nrow, ncol, nlyr)
+#> size        : 39, 36, 6  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
@@ -227,7 +229,7 @@ mop_basic_res
 #> 
 #> towards_high_end:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 6  (nrow, ncol, nlyr)
+#> size        : 39, 36, 6  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
@@ -242,29 +244,29 @@ mop_basic_res
 #> 
 #> towards_low_combined:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 1  (nrow, ncol, nlyr)
+#> size        : 39, 36, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
 #> varname     : layers_of_interest 
-#> categories  : extrapolation_variables 
-#> name        : extrapolation_variables 
-#> min value   :                   bio15 
-#> max value   :                   bio15 
+#> categories  : category 
+#> name        : category 
+#> min value   :    bio15 
+#> max value   :    bio15 
 #> 
 #> towards_high_combined:
 #> class       : SpatRaster 
-#> dimensions  : 39, 36, 1  (nrow, ncol, nlyr)
+#> size        : 39, 36, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -81.16667, -75.16667, -5, 1.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (with axis order normalized for visualization) 
 #> source(s)   : memory
 #> varname     : layers_of_interest 
-#> categories  : extrapolation_variables 
-#> name        : extrapolation_variables 
-#> min value   :                    bio5 
-#> max value   :                   bio14
+#> categories  : category 
+#> name        : category 
+#> min value   :     bio5 
+#> max value   :    bio14
 ```
 
 <br>
@@ -279,7 +281,7 @@ analysis with `mop`.
 terra::plot(mop_basic_res$mop_distances)
 ```
 
-<img src="man/figures/README-plots-1.png" width="100%" />
+<img src="man/figures/README-plots-1.png" alt="" width="100%" />
 
 ``` r
 
@@ -287,7 +289,7 @@ terra::plot(mop_basic_res$mop_distances)
 terra::plot(mop_basic_res$mop_basic)
 ```
 
-<img src="man/figures/README-plots-2.png" width="100%" />
+<img src="man/figures/README-plots-2.png" alt="" width="100%" />
 
 ``` r
 
@@ -295,7 +297,7 @@ terra::plot(mop_basic_res$mop_basic)
 terra::plot(mop_basic_res$mop_simple)
 ```
 
-<img src="man/figures/README-plots-3.png" width="100%" />
+<img src="man/figures/README-plots-3.png" alt="" width="100%" />
 
 ``` r
 
@@ -303,7 +305,7 @@ terra::plot(mop_basic_res$mop_simple)
 terra::plot(mop_basic_res$mop_detailed$towards_high_combined)
 ```
 
-<img src="man/figures/README-plots-4.png" width="100%" />
+<img src="man/figures/README-plots-4.png" alt="" width="100%" />
 
 ``` r
 
@@ -311,4 +313,4 @@ terra::plot(mop_basic_res$mop_detailed$towards_high_combined)
 terra::plot(mop_basic_res$mop_detailed$towards_low_combined)
 ```
 
-<img src="man/figures/README-plots-5.png" width="100%" />
+<img src="man/figures/README-plots-5.png" alt="" width="100%" />
