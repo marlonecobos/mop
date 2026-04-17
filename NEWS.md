@@ -1,3 +1,9 @@
+# mop 0.1.4
+
+Improved way to assign code values (`levels`) to categorical `SpatRaster` 
+objects to prevent issues in rare cases when many variables are considered. 
+
+
 # mop 0.1.3
 
 Column names of the `data.frame` used to define `levels` in categorical 
