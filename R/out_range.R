@@ -77,10 +77,14 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
 
   # variable names and number
   var_names <- colnames(m_matrix)
+  if (nvar == 1) {
+    m_range <- matrix(m_range, ncol = 1)
+    colnames(m_range) <- var_names
+  }
   nvar <- length(var_names)
 
   # defining range of what is inside M realms
-  m_range <- apply(m_matrix, 2, range)  # RETURN THIS RESULTS (MAKE IT WORK WITH ONE VARIABLE?)
+  m_range <- apply(m_matrix, 2, range)
   rownames(m_range) <- c("min", "max")
 
   # what is out basic and simple
@@ -132,11 +136,7 @@ out_range <- function(m_matrix, g_matrix, type = "basic") {
     ## interpretation table
     inter_table <- ext_interpretation(var_names, variable_codes = mul)
   } else {
-    outh <- NULL
-    outl <- NULL
-    outh1 <- NULL
-    outl1 <- NULL
-    inter_table <- NULL
+    outh <- outl <- outh1 <- outl1 <- inter_table <- NULL
   }
 
   # simple to basic
