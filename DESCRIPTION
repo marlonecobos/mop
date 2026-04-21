@@ -43,5 +43,5 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5)
 LazyData: true
-LinkingTo: Rcpp
-SystemRequirements: C++11
+LinkingTo: Rcpp (>= 1.0.14)
+SystemRequirements: C++17
