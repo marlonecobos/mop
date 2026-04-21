@@ -13,8 +13,11 @@ Marlon E. Cobos, Hannah L. Owens, Jorge Soberón, A. Townsend Peterson
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/marlonecobos/mop/workflows/R-CMD-check/badge.svg)](https://github.com/marlonecobos/mop/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mop)](https://CRAN.R-project.org/package=mop)
+[![downloads](https://cranlogs.r-pkg.org/badges/grand-total/mop)](https://cranlogs.r-pkg.org:443/badges/grand-total/mop)
+[![License](https://img.shields.io/badge/license-GPL%20(%3E=%203)-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![R-CMD-check](https://github.com/marlonecobos/mop/workflows/R-CMD-check/badge.svg)](https://github.com/marlonecobos/mop/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 <hr>
