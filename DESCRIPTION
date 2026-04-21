@@ -44,3 +44,4 @@ Depends:
     R (>= 3.5)
 LazyData: true
 LinkingTo: Rcpp
+SystemRequirements: C++11
