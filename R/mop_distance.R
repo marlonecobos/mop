@@ -39,8 +39,7 @@
 #'
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom stats mahalanobis cov
-#' @importFrom parallel detectCores
-#' @importFrom snow makeSOCKcluster stopCluster
+#' @importFrom parallel detectCores makeCluster stopCluster
 #' @importFrom doSNOW registerDoSNOW
 #' @importFrom foreach `%dopar%` foreach
 #' @importFrom Rcpp evalCpp
@@ -137,7 +136,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       n_cores <- parallel::detectCores() - 1
     }
 
-    cl <- snow::makeSOCKcluster(n_cores)
+    cl <- makeCluster(n_cores)
     doSNOW::registerDoSNOW(cl)
 
     ## progress bar preparation
@@ -174,7 +173,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       return(apply(cdist, 1, function(y) {mean(sort(y)[1:per_out])}))
     }
 
-    snow::stopCluster(cl)
+    stopCluster(cl)
   }
 
   return(mop1)

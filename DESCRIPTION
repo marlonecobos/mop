@@ -32,7 +32,6 @@ Imports:
     methods,
     parallel,
     Rcpp,
-    snow (>= 0.4),
     stats,
     terra (>= 1.6-7),
     utils
