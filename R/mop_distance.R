@@ -112,12 +112,12 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       seq_rdist <- groups[x]:(groups[x + 1] - 1)
 
       if (distance == "euclidean") {
-        cdist <- eucdist_mm(g_matrix[seq_rdist, ], m_matrix)
+        cdist <- eucdist_mm(g_matrix[seq_rdist, , drop = FALSE], m_matrix)
       } else {
         cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
-          stats::mahalanobis(x = m_matrix, center = g_matrix[y, ], cov = cv,
-                             tol = tol)
+          stats::mahalanobis(x = m_matrix, center = g_matrix[y, ],
+                             cov = cv, tol = tol)
         })
         cdist <- do.call(rbind, cdist)
       }
@@ -160,7 +160,7 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       seq_rdist <- groups[i]:(groups[i + 1] - 1)
 
       if (distance == "euclidean") {
-        cdist <- eucdist_mm(g_matrix[seq_rdist, ], m_matrix)
+        cdist <- eucdist_mm(g_matrix[seq_rdist, , drop = FALSE], m_matrix)
       } else {
         cv <- stats::cov(g_matrix)
         cdist <- lapply(seq_rdist, function(y) {
