@@ -106,7 +106,7 @@ summary.mop_results <- function(object, ...) {
   } else {
     frequ <- sum(object$mop_basic == 1, na.rm = TRUE)
   }
-  perc <- frequ / object$summary$N_g
+  perc <- (frequ / object$summary$N_g) * 100
 
   cat("Percentage = ", round(perc, 3), "% of all conditions\n", sep = "")
 
