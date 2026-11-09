@@ -39,9 +39,8 @@
 #'
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom stats mahalanobis cov
-#' @importFrom parallel detectCores makeCluster stopCluster
-#' @importFrom doSNOW registerDoSNOW
-#' @importFrom foreach `%dopar%` foreach
+#' @importFrom parallel detectCores makeCluster stopCluster clusterExport
+#' @importFrom pbapply pblapply pboptions
 #' @importFrom Rcpp evalCpp
 #'
 #' @useDynLib mop, .registration = TRUE
@@ -57,7 +56,8 @@
 
 mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
                          percentage = 1, comp_each = 2000, tol = NULL,
-                         parallel = FALSE, n_cores = NULL, progress_bar = TRUE) {
+                         parallel = FALSE, n_cores = NULL,
+                         progress_bar = TRUE) {
   # initial tests
   if (missing(m_matrix) | missing(g_matrix)) {
     stop("Arguments 'm_matrix' and 'g_matrix' must be defined.")
@@ -136,25 +136,25 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
       n_cores <- parallel::detectCores() - 1
     }
 
-    cl <- makeCluster(n_cores)
-    doSNOW::registerDoSNOW(cl)
+    cl <- parallel::makeCluster(n_cores)
 
-    ## progress bar preparation
+    ## export variables/functions to the workers
+    parallel::clusterExport(
+      cl,
+      varlist = c("groups", "g_matrix", "m_matrix", 
+                  "distance", "tol", "per_out", "eucdist_mm"),
+      envir = environment()
+    )
+
+    ## progress bar configuration via pbapply
     if (progress_bar == TRUE) {
-      pb <- utils::txtProgressBar(min = 1, max = nprocess, style = 3)
-      progress <- function(n) {
-        utils::setTxtProgressBar(pb, n)
-      }
-      opts <- list(progress = progress)
+      pbapply::pboptions(type = "txt", style = 3, char = "=")
     } else {
-      opts <- NULL
+      pbapply::pboptions(type = "none")
     }
 
     ## parallel running
-    mop1 <- foreach::foreach(
-      i = 1:nprocess, .inorder = TRUE, .options.snow = opts, .combine = "c"
-    ) %dopar% {
-
+    mop1 <- pbapply::pblapply(1:nprocess, function(i) {
       ## defining sets and all distances
       seq_rdist <- groups[i]:(groups[i + 1] - 1)
 
@@ -171,10 +171,10 @@ mop_distance <- function(m_matrix, g_matrix, distance = "euclidean",
 
       ## getting mean of closer distances
       return(apply(cdist, 1, function(y) {mean(sort(y)[1:per_out])}))
-    }
+    }, cl = cl)
 
-    stopCluster(cl)
+    parallel::stopCluster(cl)
   }
 
-  return(mop1)
+  return(unlist(mop1))
 }
