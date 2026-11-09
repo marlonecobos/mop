@@ -1,3 +1,36 @@
+## V 0.1.5 first submission
+
+In this version the following changes were made:
+- Parallel processing now is done using parallel and pbapply. Not using 
+  snow anymore. 
+- Sixed summary report to correctly print percentages and not proportions.
+
+## Test environments
+
+-   Ubuntu 26.04 LTS, R 4.5.3 (local)
+-   MacOS 26.7.2, R release (GitHub Actions) 
+-   Microsoft Windows Server 2025, R release (GitHub Actions) 
+-   Ubuntu 26.04 LTS, R release (GitHub Actions)  
+-   Ubuntu 26.04 LTS, R devel (GitHub Actions) 
+-   Ubuntu 26.04 LTS, R oldrel-1 (GitHub Actions)  
+
+## R CMD check results
+
+There was one error, non-related with this package in Ubuntu 26.04 LTS (R devel).
+The error was caused by an upstream R-devel issue. The dependency install step 
+crashed while building the package terra.
+
+There were no WARNINGs:
+
+There were no NOTEs:
+
+## Downstream dependencies
+
+kuenm2
+
+
+
+
 ## V 0.1.4 re-submission
 
 In this version the following changes were made:
@@ -58,33 +91,3 @@ There were no NOTEs:
 ## Downstream dependencies
 
 kuenm2
-
-
-
-## V 0.1.3 first submission
-
-In this version the following changes were made:
--   Column names of the data.frame used to define levels in categorical 
-SpatRaster objects were changed to (id and category) to prevent issues when 
-reading such objects after writing them as raster files in local directories.
-
-## Test environments
-
--   Ubuntu 24.04 LTS, R 4.3.3 (local)
--   MacOS 14.7.4, R release (GitHub Actions) 
--   Microsoft Windows Server 2022 10.0.20348, R release (GitHub Actions) 
--   Ubuntu 24.04 LTS, R release (GitHub Actions)  
--   Ubuntu 24.04 LTS, R devel (GitHub Actions) 
--   Ubuntu 24.04 LTS, R oldrel-1 (GitHub Actions)  
-
-## R CMD check results
-
-There were no ERRORs:
-
-There were no WARNINGs:
-
-There were no NOTEs:
-
-## Downstream dependencies
-
-There are currently no downstream dependencies for this package.

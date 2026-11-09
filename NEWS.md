@@ -1,3 +1,8 @@
+# mop 0.1.5
+
+Parallel processing handled with `parallel` and `pbapply` to exclude `snow`.
+Fixed percentage out of range reported in summary. 
+
 # mop 0.1.4
 
 Improved way to assign code values (`levels`) to categorical `SpatRaster` 
