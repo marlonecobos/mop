@@ -20,6 +20,9 @@ There was one error, non-related with this package in Ubuntu 26.04 LTS (R devel)
 The error was caused by an upstream R-devel issue. The dependency install step 
 crashed while building the package terra.
 
+The build fails during lazy loading with this error:
+"methods can add arguments to the generic ‘median’ only if '...' is an argument to the generic"
+
 There were no WARNINGs:
 
 There were no NOTEs:
