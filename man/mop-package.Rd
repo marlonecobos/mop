@@ -43,6 +43,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Marlon E. Cobos \email{manubio13@gmail.com} (\href{https://orcid.org/0000-0002-2611-1767}{ORCID})
   \item Hannah L. Owens \email{hannah.owens@gmail.com} (\href{https://orcid.org/0000-0003-0071-1745}{ORCID})
   \item Jorge Soberón \email{jsoberon@ku.edu} (\href{https://orcid.org/0000-0003-2160-4148}{ORCID})
   \item A. Townsend Peterson \email{town@ku.edu} (\href{https://orcid.org/0000-0003-0243-2379}{ORCID})
