@@ -33,7 +33,7 @@ Cobos ME, Owens HL, Soberón J, Peterson AT (2024) Detailed multivariate compari
 
 <br>
 
-*Big thanks to code contributor:* Dave Slager.
+*Big thanks to code contributors:* Dave Slager, Henrik Bengtsson.
 
 <br>
 
@@ -96,9 +96,9 @@ The code below helps to run analyses with all the details implemented in the fun
 
 ```{r basic}
 # analysis
-mop_basic_res <- mop(m = reference_layers, g = layers_of_interest, 
-                     type = "detailed", calculate_distance = TRUE, 
-                     where_distance = "all", distance = "euclidean", 
+mop_basic_res <- mop(m = reference_layers, g = layers_of_interest,
+                     type = "detailed", calculate_distance = TRUE,
+                     where_distance = "all", distance = "euclidean",
                      scale = TRUE, center = TRUE)
 
 # summary
